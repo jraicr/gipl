@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
         Classroom::factory(20)->create();
         ScholarGroup::factory(40)->create();
         State::factory(4)->create();
-        User::factory(100)->create();
+        $this->call(UserSeeder::class);
 
         Computer::factory(400)->create();
         Student::factory(300)->create();
