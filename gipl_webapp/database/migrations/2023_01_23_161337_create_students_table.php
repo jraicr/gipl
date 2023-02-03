@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
-            $table->string("name")->nullable(false);
-            $table->string("surname")->nullable(false);
-            $table->string("group_num")->nullable(false);
+            $table->string("name");
+            $table->string("surname");
+            $table->string("group_num");
 
             $table->unsignedBigInteger("scholar_group_id")->nullable();
             $table->foreign("scholar_group_id")->references("id")->on("scholar_groups")->onDelete("set null");

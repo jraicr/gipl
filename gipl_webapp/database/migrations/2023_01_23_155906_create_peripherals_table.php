@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('peripherals', function (Blueprint $table) {
             $table->id();
-            $table->string("name")->nullable(false);
-            $table->unsignedBigInteger("computer_id")->nullable(false);
+            $table->string("name");
+            $table->unsignedBigInteger("computer_id");
             $table->foreign("computer_id")->references("id")->on("computers")->onDelete("cascade");
             $table->timestamps();
         });

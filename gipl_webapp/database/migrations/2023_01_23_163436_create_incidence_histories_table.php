@@ -19,7 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger("state_id")->nullable();
             $table->foreign("state_id")->references("id")->on("states")->onDelete("set null");
 
-            $table->unsignedBigInteger("incidence_id")->nullable(false);
+            $table->unsignedBigInteger("incidence_id");
             $table->foreign("incidence_id")->references("id")->on("incidences")->onDelete("cascade");
 
             $table->timestamps();

@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('classrooms', function (Blueprint $table) {
             $table->id();
-            $table->string("num", 255)->nullable(false)->unique();
+            $table->string("num", 255)->unique();
             $table->text("seatmap")->nullable();
             $table->timestamps();
         });

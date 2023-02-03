@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('computers', function (Blueprint $table) {
             $table->id();
-            $table->string("num")->nullable(false)->unique();
+            $table->string("num")->unique();
             $table->unsignedBigInteger("classroom_id")->nullable();
             $table->foreign("classroom_id")->references("id")->on("classrooms")->onDelete("set null");
             $table->timestamps();

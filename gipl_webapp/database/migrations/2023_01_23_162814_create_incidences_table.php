@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('incidences', function (Blueprint $table) {
             $table->id();
-            $table->string("description")->nullable(false);
+            $table->string("description");
 
             $table->unsignedBigInteger("state_id")->nullable();
             $table->foreign("state_id")->references("id")->on("states")->onDelete("set null");
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger("student_id")->nullable();
             $table->foreign("student_id")->references("id")->on("students")->onDelete("set null");
 
-            $table->unsignedBigInteger("peripheral_id")->nullable(false);
+            $table->unsignedBigInteger("peripheral_id");
             $table->foreign("peripheral_id")->references("id")->on("peripherals")->onDelete("cascade");
 
             $table->unsignedBigInteger("user_id")->nullable();
