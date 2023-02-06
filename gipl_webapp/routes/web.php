@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,9 +15,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+
+// Cargamos la vista de login cuando el usuario entra en la raiz de la APP
+
+Route::get('/', [HomeController::class, 'index']);
+Route::get('profile', [ProfileController::class, 'index']);
+
 
 Route::middleware([
     'auth:sanctum',
