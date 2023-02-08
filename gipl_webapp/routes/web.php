@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\IncidenceController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -25,6 +26,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index']);
 Route::get('profile', [ProfileController::class, 'index']);
 
+//Route::get('incidences', [IncidenceController::class, 'index'])->name('app.incidences.index');
+Route::resource('incidences', IncidenceController::class)->names('app.incidences');
 
 Route::middleware([
     'auth:sanctum',
