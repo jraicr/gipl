@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classroom;
+use App\Models\Computer;
 use App\Models\Incidence;
+use App\Models\Peripheral;
+use App\Models\State;
+use App\Models\Student;
 use Illuminate\Http\Request;
 
 class IncidenceController extends Controller
@@ -25,7 +30,13 @@ class IncidenceController extends Controller
      */
     public function create()
     {
-        return view('app.incidences.create');
+        $states = State::all();
+        $classrooms = Classroom::all();
+        $computers = Computer::all();
+        $peripherals = Peripheral::all();
+        $students = Student::all();
+
+        return view('app.incidences.create', compact('states', 'classrooms', 'computers', 'peripherals', 'students'));
     }
 
     /**
