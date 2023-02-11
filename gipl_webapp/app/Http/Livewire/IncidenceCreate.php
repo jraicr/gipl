@@ -31,17 +31,19 @@ class IncidenceCreate extends Component
         $students = new Collection();
 
         $selectedPeripheral = null;
+        $selectedComputer = null;
 
          // SOLO SÍ hemos señalado un aula buscamos los ordenadores asociados y los guardamos
         if ($this->selectedClassroomID != null) {
+            $selectedComputer = $this->selectedComputerID;
             $computers = Computer::where('classroom_id', $this->selectedClassroomID)->get()->pluck('num', 'id');
 
         }
-        //  else {
-        //     // Deseleccionamos todo lo que sucede al aula
-        //     $this->selectedComputerID = "";
-        //     $this->selectedPeripheralID = "";
-        // }
+          else {
+             // Deseleccionamos todo lo que sucede al aula
+             $this->selectedComputerID = "";
+             $this->selectedPeripheralID = "";
+         }
 
         // SOLO SÍ hemos seleccionado un ordenador buscamos los periféricos y estudiantes asociados y los guardamos
         if ($this->selectedComputerID != null) {
@@ -56,6 +58,6 @@ class IncidenceCreate extends Component
         $states = State::all();
         $classrooms = Classroom::pluck('num', 'id');
 
-        return view('livewire.incidence-create', compact('states', 'classrooms', 'computers', 'peripherals', 'students', 'selectedPeripheral'));
+        return view('livewire.incidence-create', compact('states', 'classrooms', 'computers', 'peripherals', 'students', 'selectedPeripheral', 'selectedComputer'));
     }
 }
