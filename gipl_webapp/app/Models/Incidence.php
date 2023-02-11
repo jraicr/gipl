@@ -9,6 +9,9 @@ class Incidence extends Model
 {
     use HasFactory;
 
+    //protected $fillable = ['description', 'state_id', 'student_id', 'peripheral_id', 'user_id'];
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+
     // Relación uno a muchos inversa  de la tabla estados
     public function state()
     {
