@@ -253,7 +253,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => '',
+    'dashboard_url' => '/',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -307,17 +307,31 @@ return [
         //     'text' => 'search',
         // ],
         [
+            'text'        => 'Dashboard',
+            'route'       => 'app.dashboard',
+            'icon'        => 'far fa-fw fa-file',
+            'label_color' => 'success',
+        ],
+        [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
+        ['header' => 'GESTIÓN DE INCIDENCIAS'],
          [
-             'text'        => 'Incidencias',
+             'text'        => 'Listado de incidencias',
              'route'       => 'app.incidences.index',
              'icon'        => 'far fa-fw fa-file',
              //'label'       => 4,
              'label_color' => 'success',
          ],
+         [
+            'text'        => 'Crear incidencia',
+            'route'       => 'app.incidences.create',
+            'icon'        => 'far fa-fw fa-file',
+            //'label'       => 4,
+            'label_color' => 'success',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
@@ -537,5 +551,5 @@ return [
     |
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];
