@@ -19,7 +19,7 @@ class IncidenceController extends Controller
      */
     public function index()
     {
-        $incidences = Incidence::paginate(20);
+        $incidences = Incidence::latest('id')->paginate(20);
         return view('app.incidences.index', compact('incidences'));
     }
 
@@ -30,13 +30,10 @@ class IncidenceController extends Controller
      */
     public function create()
     {
-        $states = State::all();
-        $classrooms = Classroom::all();
-        $computers = Computer::all();
-        $peripherals = Peripheral::all();
-        $students = Student::all();
+        // $states = State::all();
+        // $classrooms = Classroom::all();
 
-        return view('app.incidences.create', compact('states', 'classrooms', 'computers', 'peripherals', 'students'));
+        return view('app.incidences.create');
     }
 
     /**
@@ -47,6 +44,7 @@ class IncidenceController extends Controller
      */
     public function store(Request $request)
     {
+        // return $request;
         $incidence = Incidence::create($request->all());
 
         return redirect()->route('app.incidences.edit', $incidence);
