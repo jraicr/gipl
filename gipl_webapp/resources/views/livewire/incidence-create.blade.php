@@ -1,4 +1,14 @@
 <div>
+    @if ($selectedComputer != null && !$peripherals->Count())
+        <div class="alert alert-danger alert-dismissible fade show" id="alert" role="alert">
+            El ordenador seleccionado no tiene periféricos asociados. Este error no le permitirá seguir creando
+            la incidencia. Contacte con el <strong>administrador del sistema</strong> para agregar dispositivos a
+            este ordenador.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+        </div>
+    @endif
+
     {{-- ESTADO / STATUS --}}
     <div class="form-group">
         <p class="font-weight-bold">Estado</p>
@@ -58,10 +68,4 @@
             'placeholder' => 'Describe la incidencia que está afectando a' /* . $peripheral->name*/,
         ]) !!}
     </div>
-
-    @if ($selectedComputer != null && !$peripherals->Count())
-        Este ordenador no tiene periféricos. Contacte con su administrador para agregar dispositivos a este sistema.
-    @endif
-
-
 </div>
