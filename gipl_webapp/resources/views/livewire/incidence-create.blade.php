@@ -14,7 +14,13 @@
         <p class="font-weight-bold">Estado</p>
         <div class="form-check form-check-inline">
             @foreach ($states as $state)
-                {!! Form::radio('state_id', $state->id, null, ['class' => 'form-check-input', 'id' => $state->id]) !!}
+                @if ($state->id == 1)
+                    @php $selected = true @endphp
+                @else
+                    @php $selected = null @endphp
+                @endif
+
+                {!! Form::radio('state_id', $state->id, $selected, ['class' => 'form-check-input', 'id' => $state->id]) !!}
                 {!! Form::label($state->id, $state->name, ['class' => 'form-check-label mr-2']) !!}
             @endforeach
         </div>
