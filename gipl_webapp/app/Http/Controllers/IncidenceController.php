@@ -47,7 +47,7 @@ class IncidenceController extends Controller
         // return $request;
         $incidence = Incidence::create($request->all());
 
-        return redirect()->route('app.incidences.edit', $incidence);
+        return redirect()->route('app.incidences.edit', $incidence)->with('info', 'La incidencia se creó con éxito');;
     }
 
     /**
