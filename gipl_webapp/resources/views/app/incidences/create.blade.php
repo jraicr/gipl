@@ -18,7 +18,7 @@
 
             {!! Form::open(['route' => 'app.incidences.store', 'autocomplete' => 'off']) !!}
 
-                @livewire('incidence-create')
+                @livewire('incidence-create', ['states' => $states, 'classrooms' => $classrooms])
 
         </div>
 

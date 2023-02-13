@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\IncidenceRequest;
 use App\Models\Classroom;
-use App\Models\Computer;
 use App\Models\Incidence;
-use App\Models\Peripheral;
+use App\Models\IncidenceHistories;
 use App\Models\State;
-use App\Models\Student;
 use Illuminate\Http\Request;
 
 class IncidenceController extends Controller
@@ -30,22 +29,27 @@ class IncidenceController extends Controller
      */
     public function create()
     {
-        // $states = State::all();
-        // $classrooms = Classroom::all();
+         $states = State::all();
+         $classrooms = Classroom::pluck('num', 'id');;
 
-        return view('app.incidences.create');
+        return view('app.incidences.create', compact('states', 'classrooms'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\IncidenceRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(IncidenceRequest $request)
     {
-        // return $request;
         $incidence = Incidence::create($request->all());
+
+        // Introducimos una nueva entrada en el histórico de incidencia
+        $incidenceHistoryEntry = new IncidenceHistories;
+        $incidenceHistoryEntry->incidence_id = $incidence->id;
+        $incidenceHistoryEntry->state_id = $incidence->state_id;
+        $incidenceHistoryEntry->save();
 
         return redirect()->route('app.incidences.edit', $incidence)->with('info', 'La incidencia se creó con éxito');;
     }
@@ -75,11 +79,11 @@ class IncidenceController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\IncidenceRequest  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(IncidenceRequest $request, $id)
     {
         //
     }

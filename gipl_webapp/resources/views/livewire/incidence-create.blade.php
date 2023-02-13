@@ -27,13 +27,19 @@
     </div>
 
     {{-- AULA / CLASSROOM --}}
-    <div class="form-group">
+    <div class="form-group" >
+
         {!! Form::label('classroom_id', 'Aula:') !!}
         {!! Form::select('classroom_id', $classrooms, null, [
             'class' => 'form-control form-select',
             'placeholder' => 'Seleccione un aula',
             'wire:model' => 'selectedClassroomID',
         ]) !!}
+
+        @error('classroom_id')
+            <small class="text-danger">{{ $message }} </small>
+        @enderror
+
     </div>
 
     {{-- EQUIPO / COMPUTER --}}
@@ -44,6 +50,11 @@
             'placeholder' => 'Seleccione un ordenador',
             'wire:model' => 'selectedComputerID',
         ]) !!}
+
+        @error('computer_id')
+            <small class="text-danger">{{ $message }} </small>
+        @enderror
+
     </div>
 
     {{-- PERIFÉRICO / PERIPHERAL  --}}
@@ -54,6 +65,11 @@
             'placeholder' => 'Seleccione un periférico',
             'wire:model' => 'selectedPeripheralID',
         ]) !!}
+
+        @error('peripheral_id')
+            <small class="text-danger">{{ $message }} </small>
+        @enderror
+
     </div>
 
     {{-- ALUMNO / STUDENT --}}
@@ -73,5 +89,9 @@
             'class' => 'form-control',
             'placeholder' => 'Describe la incidencia que está afectando a' /* . $peripheral->name*/,
         ]) !!}
+
+        @error('description')
+            <small class="text-danger">{{ $message }} </small>
+        @enderror
     </div>
 </div>

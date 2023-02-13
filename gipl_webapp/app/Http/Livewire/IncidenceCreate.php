@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Http\Requests\IncidenceRequest;
 use App\Models\Classroom;
 use App\Models\Computer;
 use App\Models\Peripheral;
@@ -9,14 +10,23 @@ use App\Models\State;
 use App\Models\Student;
 use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
+use Symfony\Component\Console\Input\Input;
 
 class IncidenceCreate extends Component
 {
+    // Parámetros recibidos a través IncidenceController create()
+    public $states;
+    public $classrooms;
+
+
+    // Parámetros actualizados en tiempo real según se rellenan los datos del formulario de la vista
+    // También se actualizan en mount() cuando se recarga la página parar mostrar validaciones de error.
     public $selectedClassroomID;
     public $selectedComputerID;
     public $selectedPeripheralID;
 
-    // public function updatingSearch()  { }
+
+    public function updatingSearch() { }
 
     public function render()
     {
@@ -33,17 +43,16 @@ class IncidenceCreate extends Component
         $selectedPeripheral = null;
         $selectedComputer = null;
 
-         // SOLO SÍ hemos señalado un aula buscamos los ordenadores asociados y los guardamos
+        // SOLO SÍ hemos señalado un aula buscamos los ordenadores asociados y los guardamos
         if ($this->selectedClassroomID != null) {
             $selectedComputer = $this->selectedComputerID;
             $computers = Computer::where('classroom_id', $this->selectedClassroomID)->get()->pluck('num', 'id');
 
+        } else {
+            // Deseleccionamos todo lo que sucede al aula
+            $this->selectedComputerID = "";
+            $this->selectedPeripheralID = "";
         }
-          else {
-             // Deseleccionamos todo lo que sucede al aula
-             $this->selectedComputerID = "";
-             $this->selectedPeripheralID = "";
-         }
 
         // SOLO SÍ hemos seleccionado un ordenador buscamos los periféricos y estudiantes asociados y los guardamos
         if ($this->selectedComputerID != null) {
@@ -55,9 +64,15 @@ class IncidenceCreate extends Component
             $selectedPeripheral = $this->selectedPeripheralID;
         }
 
-        $states = State::all();
-        $classrooms = Classroom::pluck('num', 'id');
+        $states = $this->states;
+        $classrooms = $this->classrooms;
+        return view('livewire.incidence-create', compact('states',  'classrooms', 'computers', 'peripherals', 'students', 'selectedPeripheral', 'selectedComputer'));
+    }
 
-        return view('livewire.incidence-create', compact('states', 'classrooms', 'computers', 'peripherals', 'students', 'selectedPeripheral', 'selectedComputer'));
+    public function mount()
+    {
+        $this->selectedClassroomID = old('classroom_id');
+        $this->selectedComputerID = old('computer_id');
+        $this->selectedPeripheralID = old('peripheral_id');
     }
 }
