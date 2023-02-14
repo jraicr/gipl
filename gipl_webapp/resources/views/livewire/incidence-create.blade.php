@@ -88,6 +88,7 @@
         {!! Form::textarea('description', null, [
             'class' => 'form-control',
             'placeholder' => 'Describe la incidencia que está afectando a' /* . $peripheral->name*/,
+            'wire:ignore',
         ]) !!}
 
         @error('description')
