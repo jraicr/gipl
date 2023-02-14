@@ -20,7 +20,7 @@
                     @php $selected = null @endphp
                 @endif
 
-                {!! Form::radio('state_id', $state->id, $selected, ['class' => 'form-check-input', 'id' => $state->id]) !!}
+                {!! Form::radio('state_id', $state->id, $selected, ['class' => 'form-check-input', 'id' => $state->id, 'wire:ignore']) !!}
                 {!! Form::label($state->id, $state->name, ['class' => 'form-check-label mr-2']) !!}
             @endforeach
         </div>

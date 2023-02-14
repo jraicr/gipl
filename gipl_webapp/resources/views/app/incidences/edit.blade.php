@@ -28,7 +28,7 @@
 
             {!! Form::model($incidence, ['route' => ['app.incidences.update', $incidence], 'autocomplete' => 'off', 'method' => 'put']) !!}
 
-                @livewire('incidence-create', ['incidence' => $incidence, 'states' => $states, 'classrooms' => $classrooms])
+                @livewire('app.incidences.partials.form', ['incidence' => $incidence, 'states' => $states, 'classrooms' => $classrooms])
 
         </div>
 

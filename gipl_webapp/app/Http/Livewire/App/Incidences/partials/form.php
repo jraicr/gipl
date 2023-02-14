@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Livewire;
+namespace App\Http\Livewire\App\Incidences\Partials;
 
 use App\Http\Requests\IncidenceRequest;
 use App\Models\Classroom;
@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Livewire\Component;
 use Symfony\Component\Console\Input\Input;
 
-class IncidenceCreate extends Component
+class Form extends Component
 {
     // Parámetros recibidos a través IncidenceController create()
     public $states;
@@ -69,7 +69,7 @@ class IncidenceCreate extends Component
         $classrooms = $this->classrooms;
         $incidence = $this->incidence;
 
-        return view('livewire.incidence-create', compact('incidence', 'states',  'classrooms', 'computers', 'peripherals', 'students', 'selectedPeripheral', 'selectedComputer'));
+        return view('livewire.app.incidences.partials.form', compact('incidence', 'states',  'classrooms', 'computers', 'peripherals', 'students', 'selectedPeripheral', 'selectedComputer'));
     }
 
     public function mount()
