@@ -18,6 +18,8 @@ class IncidenceCreate extends Component
     public $states;
     public $classrooms;
 
+    // Parámetros recibidos atráves de IncidenceController edit
+    public $incidence;
 
     // Parámetros actualizados en tiempo real según se rellenan los datos del formulario de la vista
     // También se actualizan en mount() cuando se recarga la página parar mostrar validaciones de error.
@@ -25,12 +27,10 @@ class IncidenceCreate extends Component
     public $selectedComputerID;
     public $selectedPeripheralID;
 
-
     public function updatingSearch() { }
 
     public function render()
     {
-
         // Obtenemos el ID del aula buscando por su número
         $classroomID = Classroom::select('id')->where('num', $this->selectedClassroomID)->get();
 
@@ -45,7 +45,6 @@ class IncidenceCreate extends Component
 
         // SOLO SÍ hemos señalado un aula buscamos los ordenadores asociados y los guardamos
         if ($this->selectedClassroomID != null) {
-            $selectedComputer = $this->selectedComputerID;
             $computers = Computer::where('classroom_id', $this->selectedClassroomID)->get()->pluck('num', 'id');
 
         } else {
@@ -58,6 +57,8 @@ class IncidenceCreate extends Component
         if ($this->selectedComputerID != null) {
             $peripherals = Peripheral::where('computer_id', $this->selectedComputerID)->get()->pluck('name', 'id');
             $students = Student::where('computer_id', $this->selectedComputerID)->get()->pluck('name', 'id');
+
+            $selectedComputer = $this->selectedComputerID;
         }
 
         if ($this->selectedPeripheralID != null) {
@@ -66,13 +67,22 @@ class IncidenceCreate extends Component
 
         $states = $this->states;
         $classrooms = $this->classrooms;
-        return view('livewire.incidence-create', compact('states',  'classrooms', 'computers', 'peripherals', 'students', 'selectedPeripheral', 'selectedComputer'));
+        $incidence = $this->incidence;
+
+        return view('livewire.incidence-create', compact('incidence', 'states',  'classrooms', 'computers', 'peripherals', 'students', 'selectedPeripheral', 'selectedComputer'));
     }
 
     public function mount()
     {
-        $this->selectedClassroomID = old('classroom_id');
-        $this->selectedComputerID = old('computer_id');
-        $this->selectedPeripheralID = old('peripheral_id');
+        if (old('classroom_id') || old('computer_id') || old('peripheral_id')) {
+            $this->selectedClassroomID = old('classroom_id');
+            $this->selectedComputerID = old('computer_id');
+            $this->selectedPeripheralID = old('peripheral_id');
+
+        } else if ($this->incidence) {
+            $this->selectedClassroomID = $this->incidence->computer->classroom_id;
+            $this->selectedComputerID = $this->incidence->computer->id;
+            $this->selectedPeripheralID = $this->incidence->peripheral_id;
+        }
     }
 }

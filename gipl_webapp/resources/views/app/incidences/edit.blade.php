@@ -17,6 +17,28 @@
     @endif
 
 
+    <div class="card">
+
+         {{-- <div class="card-header">
+
+        </div> --}}
+
+        <div class="card-body">
+
+
+            {!! Form::model($incidence, ['route' => ['app.incidences.update', $incidence], 'autocomplete' => 'off', 'method' => 'put']) !!}
+
+                @livewire('incidence-create', ['incidence' => $incidence, 'states' => $states, 'classrooms' => $classrooms])
+
+        </div>
+
+        <div class="card-footer">
+            {!! Form::submit('Editar Incidencia', ['class' => 'btn btn-primary']) !!}
+            {!! Form::close() !!}
+        </div>
+    </div>
+
+
 @stop
 
 {{-- @section('css')

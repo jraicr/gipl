@@ -20,4 +20,8 @@ class Computer extends Model
     public function classroom() {
         return $this->belongsTo(Classroom::class);
     }
+
+    public function incidences() {
+        return $this->hasManyThrough(Incidence::class, Peripheral::class);
+    }
 }

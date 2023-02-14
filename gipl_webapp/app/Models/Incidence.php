@@ -47,4 +47,8 @@ class Incidence extends Model
     {
         return $this->hasMany(IncidenceHistories::class);
     }
+
+    public function computer() {
+        return $this->hasOneThrough(Computer::class, Peripheral::class, 'id', 'id', 'peripheral_id', 'computer_id');
+    }
 }

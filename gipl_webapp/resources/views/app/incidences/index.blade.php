@@ -24,6 +24,7 @@
                     <th>Descripción</th>
                     <th>Estado</th>
                     <th>Fecha Creación</th>
+                    <th colspan="2"></th>
                 </thead>
 
                 <tbody>
@@ -54,7 +55,10 @@
                                 <td>Sin estado asignado</td>
                             @endif
                             <td>{{ $incidence->created_at }}</td>
-                        <tr>
+
+                            <td><a class="btn btn-primary" href="{{ route('app.incidences.edit', $incidence) }}">Editar</td>
+                            <td></td>
+                        </tr>
                     @endforeach
                 </tbody>
             </table>

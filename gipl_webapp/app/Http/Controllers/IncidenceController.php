@@ -29,8 +29,8 @@ class IncidenceController extends Controller
      */
     public function create()
     {
-         $states = State::all();
-         $classrooms = Classroom::pluck('num', 'id');;
+        $states = State::all();
+        $classrooms = Classroom::pluck('num', 'id');
 
         return view('app.incidences.create', compact('states', 'classrooms'));
     }
@@ -73,19 +73,27 @@ class IncidenceController extends Controller
      */
     public function edit(Incidence $incidence)
     {
-        return view('app.incidences.edit', compact('incidence'));
+
+        $states = State::all();
+        $classrooms = Classroom::pluck('num', 'id');
+
+        return view('app.incidences.edit', compact('incidence', 'states', 'classrooms'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\IncidenceRequest  $request
-     * @param  int  $id
+     * @param  Incidence  $incidence
      * @return \Illuminate\Http\Response
      */
-    public function update(IncidenceRequest $request, $id)
+    public function update(IncidenceRequest $request, Incidence $incidence)
     {
-        //
+        $incidence->update($request->all());
+
+        return redirect()->route('app.incidences.edit', $incidence)->with('info', 'La incidencia se actualizó con éxito');
+
+
     }
 
     /**
