@@ -8,6 +8,14 @@
 
 @section('content')
 
+    @if (session('info'))
+        <div class="alert alert-success alert-dismissible fade show" id="alert" role="alert">
+            <strong>{{ session('info') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+        </div>
+    @endif
+
     <div class="card">
         <div class="card-header">
             <a class="btn btn-primary" href="{{ route('app.incidences.create') }}">Crear incidencia</a>
@@ -57,7 +65,11 @@
                             <td>{{ $incidence->created_at }}</td>
 
                             <td><a class="btn btn-primary" href="{{ route('app.incidences.edit', $incidence) }}">Editar</td>
-                            <td></td>
+                            <td>
+                                {!! Form::model('incidence', ['route' => ['app.incidences.destroy', $incidence], 'method' => 'DELETE']) !!}
+                                {!! Form::submit('Eliminar', ['class' => 'btn btn-danger']) !!}
+                                {!! Form::close() !!}
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>

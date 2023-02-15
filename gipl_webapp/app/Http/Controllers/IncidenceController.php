@@ -99,11 +99,13 @@ class IncidenceController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Incidence  $incidence
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Incidence $incidence)
     {
-        //
+        $incidence->delete();
+
+        return redirect()->route('app.incidences.index')->with('info', 'La incidencia se eliminó correctamente.');
     }
 }
