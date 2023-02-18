@@ -45,12 +45,6 @@ class IncidenceController extends Controller
     {
         $incidence = Incidence::create($request->all());
 
-        // Introducimos una nueva entrada en el histórico de incidencia
-        $incidenceHistoryEntry = new IncidenceHistories;
-        $incidenceHistoryEntry->incidence_id = $incidence->id;
-        $incidenceHistoryEntry->state_id = $incidence->state_id;
-        $incidenceHistoryEntry->save();
-
         return redirect()->route('app.incidences.edit', $incidence)->with('info', 'La incidencia se creó con éxito');;
     }
 
