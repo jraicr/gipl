@@ -16,11 +16,22 @@ return new class extends Migration
         Schema::create('incidence_histories', function (Blueprint $table) {
             $table->id();
 
+            $table->unsignedBigInteger("incidence_id");
+            $table->foreign("incidence_id")->references("id")->on("incidences")->onDelete("cascade");
+
             $table->unsignedBigInteger("state_id")->nullable();
             $table->foreign("state_id")->references("id")->on("states")->onDelete("set null");
 
-            $table->unsignedBigInteger("incidence_id");
-            $table->foreign("incidence_id")->references("id")->on("incidences")->onDelete("cascade");
+            $table->unsignedBigInteger("student_id")->nullable();
+            $table->foreign("student_id")->references("id")->on("students")->onDelete("set null");
+
+            $table->unsignedBigInteger("peripheral_id");
+            $table->foreign("peripheral_id")->references("id")->on("peripherals")->onDelete("cascade");
+
+            $table->unsignedBigInteger("user_id")->nullable();
+            $table->foreign("user_id")->references("id")->on("users")->onDelete("set null");
+
+            $table->string('description')->nullable();
 
             $table->timestamps();
         });
