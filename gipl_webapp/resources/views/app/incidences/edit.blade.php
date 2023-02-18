@@ -3,7 +3,7 @@
 @section('title', 'GIPL')
 
 @section('content_header')
-    <h1>Editando incidencia X</h1>
+    <h1>Editando incidencia nº {{$incidence->id}}</h1>
 @stop
 
 @section('content')
