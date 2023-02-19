@@ -85,13 +85,6 @@ class IncidenceObserver
             $newHistoric->peripheral_id = $incidence->peripheral_id;
         }
 
-        if ($lastHistoricData->user_id == $incidence->user_id) {
-            $newHistoric->user_id = null;
-
-        }  else {
-            $newHistoric->user_id = $incidence->user_id;
-        }
-
         if ($lastHistoricData->description == $incidence->description) {
             $newHistoric->description = null;
 
@@ -99,11 +92,10 @@ class IncidenceObserver
             $newHistoric->description = $incidence->description;
         }
 
-        if ($newHistoric->state_id != null || $newHistoric->student_id != null || $newHistoric->peripheral_id != null ||
-            $newHistoric->user_id != null || $newHistoric->description != null) {
+        if ($newHistoric->state_id != null || $newHistoric->student_id != null || $newHistoric->peripheral_id != null || $newHistoric->description != null) {
+                $newHistoric->user_id = auth()->user()->id;
                 $newHistoric->save();
             }
-
     }
 
     /**

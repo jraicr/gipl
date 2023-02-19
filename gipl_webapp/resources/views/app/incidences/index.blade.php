@@ -64,6 +64,7 @@
                             @endif
                             <td>{{ $incidence->created_at }}</td>
 
+                            <td><a class="btn btn-info" href="{{ route('app.incidences.show', $incidence) }}">Ver</td>
                             <td><a class="btn btn-primary" href="{{ route('app.incidences.edit', $incidence) }}">Editar
                             </td>
                             <td>
