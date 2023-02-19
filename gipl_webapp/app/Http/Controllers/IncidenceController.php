@@ -45,7 +45,7 @@ class IncidenceController extends Controller
     {
         $incidence = Incidence::create($request->all());
 
-        return redirect()->route('app.incidences.edit', $incidence)->with('info', 'La incidencia se creó con éxito');;
+        return redirect()->route('app.incidences.show', $incidence)->with('info', 'La incidencia se creó con éxito');;
     }
 
     /**
@@ -56,7 +56,8 @@ class IncidenceController extends Controller
      */
     public function show(Incidence $incidence)
     {
-        return view('app.incidences.show', compact('incidence'));
+        $histories = $incidence->incidenceHistories()->get();
+        return view('app.incidences.show', compact('incidence', 'histories'));
     }
 
     /**
@@ -85,7 +86,7 @@ class IncidenceController extends Controller
     {
         $incidence->update($request->all());
 
-        return redirect()->route('app.incidences.edit', $incidence)->with('info', 'La incidencia se actualizó con éxito');
+        return redirect()->route('app.incidences.show', $incidence)->with('info', 'La incidencia se actualizó con éxito');
 
 
     }

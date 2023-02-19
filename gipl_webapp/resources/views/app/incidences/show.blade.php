@@ -1,12 +1,146 @@
 @extends('adminlte::page')
 
-@section('title', 'GIPL')
+@section('title', 'GIPL - Detalle de incidencia')
+
+@php
+    $displayState = isset($incidence->state->name) ? $incidence->state->name : 'Sin estado asignado';
+@endphp
 
 @section('content_header')
-    <h1>Detalles de la incidencia</h1>
+    @if (session('info'))
+        <div class="alert alert-success alert-dismissible fade show" id="alert" role="alert">
+            <strong>{{ session('info') }}</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+        </div>
+    @endif
+
+    <div class="card">
+        <div class="card-header">
+            <h1>Incidencia Nº {{ $incidence->id }} <span
+                    class="text-md badge badge-primary badge-pill text-justify ml-2">{{ $displayState }}</span></h1>
+        </div>
+
+        <div class="card-footer">
+            <div class="d-flex flex-row">
+                <a class="btn btn-primary btn-sm mr-2" href="{{ route('app.incidences.edit', $incidence) }}">Editar</a>
+
+
+                <form action="{{ route('app.incidences.destroy', $incidence) }}" method="POST">
+                    @csrf
+                    @method('DELETE')
+                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                </form>
+
+            </div>
+            {{-- <span>{!! Form::model('incidence', ['route' => ['app.incidences.destroy', $incidence], 'method' => 'DELETE']) !!}
+                {!! Form::submit('Eliminar', ['class' => 'btn btn-danger btn-sm remove-incidence']) !!}
+                {!! Form::close() !!}
+            </span> --}}
+        </div>
+    </div>
 @stop
 
 @section('content')
+
+    <div class="card">
+
+        <div class="card-header">
+            @php
+                $day = \Carbon\Carbon::parse($incidence->created_at)->format('d');
+                $month = \Carbon\Carbon::parse($incidence->created_at)->format('F');
+                $year = \Carbon\Carbon::parse($incidence->created_at)->format('Y');
+                $hour = \Carbon\Carbon::parse($incidence->created_at)->format('g:i A');
+            @endphp
+
+            @php
+                $displayUser = isset($incidence->user->name) ? $incidence->user->name : 'usuario eliminado';
+            @endphp
+
+            Creado por <strong>{{ $displayUser }}</strong> el {{ $day }} de {{ $month }} a las
+            {{ $hour }}
+
+
+
+        </div>
+
+        <div class="card-body">
+
+            <h2>Aula {{ $incidence->computer->classroom->num }}</h2>
+
+            <hr>
+
+
+            <h4>Sistema afectado</h4>
+            <ul class="list-group mb-4">
+                <li class="list-group-item justify-content-between align-items-center">
+                    <strong>Ordenador</strong> {{ $incidence->computer->num }}
+                </li>
+                <li class="list-group-item"><strong>Dispositivo o hardware: </strong> {{ $incidence->peripheral->name }}
+                </li>
+            </ul>
+
+
+            <h4>Estudiante responsable durante el turno</h4>
+            <ul class="list-group mb-4">
+                @if ($incidence->student)
+                    <li class="list-group-item"> <strong>Alumno: </strong> {{ $incidence->student->name }}</li>
+                    <li class="list-group-item"> <strong>Grupo Escolar: </strong> {{ $incidence->student->group_num }}</li>
+                @else
+                    <li class="list-group-item"> Sin estudiante asignado</li>
+                @endif
+            </ul>
+
+            <h4>Descripción y observaciones de la incidencia</h4>
+            <ul class="list-group mb-4">
+                <li class="list-group-item justify-content-between align-items-center">
+                    {{ $incidence->description }}
+                </li>
+            </ul>
+
+        </div>
+
+        <div class="card-footer">
+            <h4>Histórico</h4>
+            @foreach ($histories as $historie)
+                @php
+                    $displayUser = isset($historie->user->name) ? $historie->user->name : 'usuario eliminado';
+                    $day = \Carbon\Carbon::parse($historie->updated_at)->format('d');
+                    $month = \Carbon\Carbon::parse($historie->updated_at)->format('F');
+                    $year = \Carbon\Carbon::parse($historie->updated_at)->format('Y');
+                    $hour = \Carbon\Carbon::parse($historie->updated_at)->format('g:i A');
+                @endphp
+
+                <div class="card">
+
+                    <div class="card-header">
+                        Actualizado por <strong>{{ $displayUser }}</strong> el {{ $day }} de
+                        {{ $month }} del {{ $year }} a las
+                        {{ $hour }}
+                    </div>
+
+                    <div class="card-body">
+                        @if (isset($historie->state))
+                            <p><strong>Estado: </strong> {{ $historie->state->name }}</p>
+                        @endif
+
+                        @if (isset($historie->peripheral))
+                            <p><strong>Dispositivo: </strong> {{ $historie->peripheral->name }}</p>
+                        @endif
+
+                        @if (isset($historie->student))
+                            <p><strong>Estudiante: </strong> {{ $historie->student->name }}</p>
+                        @endif
+
+                        @if (isset($historie->description))
+                            <p><strong>Descripción: </strong> {{ $historie->description }}</p>
+                        @endif
+                    </div>
+                </div>
+            @endforeach
+
+        </div>
+    </div>
 
 @stop
 
