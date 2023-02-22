@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IncidenceController;
+use App\Http\Controllers\PeripheralController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,7 @@ Route::get('profile', [ProfileController::class, 'index']);
 
 //Route::get('incidences', [IncidenceController::class, 'index'])->name('app.incidences.index');
 Route::resource('incidences', IncidenceController::class)->names('app.incidences');
+Route::resource('peripherals', PeripheralController::class)->names('app.peripherals');
 
 Route::middleware([
     'auth:sanctum',
