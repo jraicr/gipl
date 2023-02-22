@@ -12,14 +12,14 @@
 
         <div class="card-body">
 
-            {!! Form::open(['route' => 'app.incidences.store', 'autocomplete' => 'off']) !!}
+            {!! Form::open(['route' => 'app.peripherals.store', 'autocomplete' => 'off']) !!}
 
-                @livewire('app.incidences.partials.form', ['states' => $states, 'classrooms' => $classrooms])
+                @livewire('app.peripherals.partials.form', ['classrooms' => $classrooms])
 
         </div>
 
         <div class="card-footer">
-            {!! Form::submit('Crear Incidencia', ['class' => 'btn btn-primary']) !!}
+            {!! Form::submit('Crear Periférico', ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
         </div>
     </div>
