@@ -66,7 +66,7 @@ class IncidenceController extends Controller
      */
     public function edit(Incidence $incidence)
     {
-
+        $this->authorize('author', $incidence);
         $states = State::all();
         $classrooms = Classroom::pluck('num', 'id');
 
@@ -82,11 +82,10 @@ class IncidenceController extends Controller
      */
     public function update(IncidenceRequest $request, Incidence $incidence)
     {
+        $this->authorize('author', $incidence);
         $incidence->update($request->all());
 
         return redirect()->route('app.incidences.show', $incidence)->with('info', 'La incidencia se actualizó con éxito');
-
-
     }
 
     /**
@@ -97,6 +96,7 @@ class IncidenceController extends Controller
      */
     public function destroy(Incidence $incidence)
     {
+        $this->authorize('author', $incidence);
         $incidence->delete();
 
         return redirect()->route('app.incidences.index')->with('info', 'La incidencia se eliminó correctamente.');

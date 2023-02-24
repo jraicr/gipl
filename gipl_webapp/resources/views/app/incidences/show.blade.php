@@ -21,23 +21,25 @@
                     class="text-md badge badge-primary badge-pill text-justify ml-2">{{ $displayState }}</span></h1>
         </div>
 
-        <div class="card-footer">
-            <div class="d-flex flex-row">
-                <a class="btn btn-primary btn-sm mr-2" href="{{ route('app.incidences.edit', $incidence) }}">Editar</a>
+        @if ($incidence->user_id == auth()->user()->id || auth()->user()->id == 1)
+            <div class="card-footer">
+                <div class="d-flex flex-row">
+                    <a class="btn btn-primary btn-sm mr-2" href="{{ route('app.incidences.edit', $incidence) }}">Editar</a>
 
 
-                <form action="{{ route('app.incidences.destroy', $incidence) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
-                </form>
+                    <form action="{{ route('app.incidences.destroy', $incidence) }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                    </form>
 
-            </div>
-            {{-- <span>{!! Form::model('incidence', ['route' => ['app.incidences.destroy', $incidence], 'method' => 'DELETE']) !!}
+                </div>
+                {{-- <span>{!! Form::model('incidence', ['route' => ['app.incidences.destroy', $incidence], 'method' => 'DELETE']) !!}
                 {!! Form::submit('Elim  inar', ['class' => 'btn btn-danger btn-sm remove-incidence']) !!}
                 {!! Form::close() !!}
             </span> --}}
-        </div>
+            </div>
+        @endif
     </div>
 @stop
 
@@ -100,51 +102,51 @@
         @if ($incidence->revisionHistory->Count())
 
 
-        <div class="card-footer">
-            <h4 class="mt-4">Histórico</h4>
+            <div class="card-footer">
+                <h4 class="mt-4">Histórico</h4>
 
-            @php
-                $lastUpdateDate = new Date();
-                $cardOpen = false;
-            @endphp
-
-            @foreach ($incidence->revisionHistory as $history)
                 @php
-                    $displayUser = isset($history->userResponsible()->name) ? $history->userResponsible()->name : 'usuario eliminado';
-                    $day = \Carbon\Carbon::parse($history->updated_at)->format('d');
-                    $month = \Carbon\Carbon::parse($history->updated_at)->format('F');
-                    $year = \Carbon\Carbon::parse($history->updated_at)->format('Y');
-                    $hour = \Carbon\Carbon::parse($history->updated_at)->format('g:i A');
+                    $lastUpdateDate = new Date();
+                    $cardOpen = false;
                 @endphp
 
-                @if ($lastUpdateDate != $history->updated_at && !$cardOpen)
-                    <div class="card">
-
-                        <div class="card-header bg-secondary">
-                            Actualizado por <strong>{{ $displayUser }}</strong> el {{ $day }} de
-                            {{ $month }} del {{ $year }} a las
-                            {{ $hour }}
-                        </div>
-                        @php
-                            $lastUpdateDate = $history->updated_at;
-                            $cardOpen = true;
-                        @endphp
-                @endif
-
-                <div class="card-body">
-                    Campo
-                    <strong>{{ $history->fieldName() }}</strong> actualizado de {{ $history->oldValue() }} a
-                    {{ $history->newValue() }}
-                </div>
-
-                @if ($lastUpdateDate != $history->updated_at && $cardOpen)
-                    </div> <!-- fin de div card -->
-
+                @foreach ($incidence->revisionHistory as $history)
                     @php
-                        $cardOpen = false;
+                        $displayUser = isset($history->userResponsible()->name) ? $history->userResponsible()->name : 'usuario eliminado';
+                        $day = \Carbon\Carbon::parse($history->updated_at)->format('d');
+                        $month = \Carbon\Carbon::parse($history->updated_at)->format('F');
+                        $year = \Carbon\Carbon::parse($history->updated_at)->format('Y');
+                        $hour = \Carbon\Carbon::parse($history->updated_at)->format('g:i A');
                     @endphp
-                @endif
-            @endforeach
+
+                    @if ($lastUpdateDate != $history->updated_at && !$cardOpen)
+                        <div class="card">
+
+                            <div class="card-header bg-secondary">
+                                Actualizado por <strong>{{ $displayUser }}</strong> el {{ $day }} de
+                                {{ $month }} del {{ $year }} a las
+                                {{ $hour }}
+                            </div>
+                            @php
+                                $lastUpdateDate = $history->updated_at;
+                                $cardOpen = true;
+                            @endphp
+                    @endif
+
+                    <div class="card-body">
+                        Campo
+                        <strong>{{ $history->fieldName() }}</strong> actualizado de {{ $history->oldValue() }} a
+                        {{ $history->newValue() }}
+                    </div>
+
+                    @if ($lastUpdateDate != $history->updated_at && $cardOpen)
+            </div> <!-- fin de div card -->
+
+            @php
+                $cardOpen = false;
+            @endphp
+        @endif
+        @endforeach
     </div>
     @endif
     </div>
