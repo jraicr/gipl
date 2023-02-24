@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Venturecraft\Revisionable\Revisionable;
 
-class Peripheral extends Model
+class Peripheral extends Revisionable
 {
     use HasFactory;
 
@@ -15,5 +16,10 @@ class Peripheral extends Model
 
     public function computer() {
         return $this->belongsTo(Computer::class);
+    }
+
+    public function identifiableName()
+    {
+        return $this->name;
     }
 }
