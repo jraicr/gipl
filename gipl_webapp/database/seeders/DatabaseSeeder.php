@@ -42,6 +42,5 @@ class DatabaseSeeder extends Seeder
         Student::factory(300)->create();
         Peripheral::factory(1000)->create();
         Incidence::factory(100)->create();
-        IncidenceHistories::factory(10)->create();
     }
 }

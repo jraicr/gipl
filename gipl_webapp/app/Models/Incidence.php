@@ -58,14 +58,6 @@ class Incidence extends Model
         return $this->belongsTo(User::class);
     }
 
-    /**
-     * Relación uno a muchos
-     */
-    public function incidenceHistories()
-    {
-        return $this->hasMany(IncidenceHistories::class);
-    }
-
     public function computer() {
         return $this->hasOneThrough(Computer::class, Peripheral::class, 'id', 'id', 'peripheral_id', 'computer_id');
     }
