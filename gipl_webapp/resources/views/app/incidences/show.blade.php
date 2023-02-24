@@ -34,7 +34,7 @@
 
             </div>
             {{-- <span>{!! Form::model('incidence', ['route' => ['app.incidences.destroy', $incidence], 'method' => 'DELETE']) !!}
-                {!! Form::submit('Eliminar', ['class' => 'btn btn-danger btn-sm remove-incidence']) !!}
+                {!! Form::submit('Elim  inar', ['class' => 'btn btn-danger btn-sm remove-incidence']) !!}
                 {!! Form::close() !!}
             </span> --}}
         </div>
@@ -59,9 +59,6 @@
 
             Creado por <strong>{{ $displayUser }}</strong> el {{ $day }} de {{ $month }} a las
             {{ $hour }}
-
-
-
         </div>
 
         <div class="card-body">
@@ -71,7 +68,7 @@
             <hr>
 
 
-            <h4>Sistema afectado</h4>
+            <h4 class="bg-primary p-2">Sistema afectado</h4>
             <ul class="list-group mb-4">
                 <li class="list-group-item justify-content-between align-items-center">
                     <strong>Ordenador</strong> {{ $incidence->computer->num }}
@@ -81,7 +78,7 @@
             </ul>
 
 
-            <h4>Estudiante responsable durante el turno</h4>
+            <h4 class="bg-primary p-2">Estudiante responsable durante el turno</h4>
             <ul class="list-group mb-4">
                 @if ($incidence->student)
                     <li class="list-group-item"> <strong>Alumno: </strong> {{ $incidence->student->name }}</li>
@@ -91,7 +88,7 @@
                 @endif
             </ul>
 
-            <h4>Descripción y observaciones de la incidencia</h4>
+            <h4 class="bg-primary p-2">Descripción y observaciones de la incidencia</h4>
             <ul class="list-group mb-4">
                 <li class="list-group-item justify-content-between align-items-center">
                     {{ $incidence->description }}
@@ -101,45 +98,51 @@
         </div>
 
         <div class="card-footer">
-            <h4>Histórico</h4>
-            @foreach ($histories as $historie)
+            <h4 class="mt-4">Histórico</h4>
+
+            @php
+                $lastUpdateDate = new Date();
+                $cardOpen = false;
+            @endphp
+
+            @foreach ($incidence->revisionHistory as $history)
                 @php
-                    $displayUser = isset($historie->user->name) ? $historie->user->name : 'usuario eliminado';
-                    $day = \Carbon\Carbon::parse($historie->updated_at)->format('d');
-                    $month = \Carbon\Carbon::parse($historie->updated_at)->format('F');
-                    $year = \Carbon\Carbon::parse($historie->updated_at)->format('Y');
-                    $hour = \Carbon\Carbon::parse($historie->updated_at)->format('g:i A');
+                    $displayUser = isset($history->userResponsible()->name) ? $history->userResponsible()->name : 'usuario eliminado';
+                    $day = \Carbon\Carbon::parse($history->updated_at)->format('d');
+                    $month = \Carbon\Carbon::parse($history->updated_at)->format('F');
+                    $year = \Carbon\Carbon::parse($history->updated_at)->format('Y');
+                    $hour = \Carbon\Carbon::parse($history->updated_at)->format('g:i A');
                 @endphp
 
-                <div class="card">
+                @if ($lastUpdateDate != $history->updated_at && !$cardOpen)
+                    <div class="card">
 
-                    <div class="card-header">
-                        Actualizado por <strong>{{ $displayUser }}</strong> el {{ $day }} de
-                        {{ $month }} del {{ $year }} a las
-                        {{ $hour }}
-                    </div>
+                        <div class="card-header bg-secondary">
+                            Actualizado por <strong>{{ $displayUser }}</strong> el {{ $day }} de
+                            {{ $month }} del {{ $year }} a las
+                            {{ $hour }}
+                        </div>
+                        @php
+                            $lastUpdateDate = $history->updated_at;
+                            $cardOpen = true;
+                        @endphp
+                @endif
 
-                    <div class="card-body">
-                        @if (isset($historie->state))
-                            <p><strong>Estado: </strong> {{ $historie->state->name }}</p>
-                        @endif
-
-                        @if (isset($historie->peripheral))
-                            <p><strong>Dispositivo: </strong> {{ $historie->peripheral->name }}</p>
-                        @endif
-
-                        @if (isset($historie->student))
-                            <p><strong>Estudiante: </strong> {{ $historie->student->name }}</p>
-                        @endif
-
-                        @if (isset($historie->description))
-                            <p><strong>Descripción: </strong> {{ $historie->description }}</p>
-                        @endif
-                    </div>
+                <div class="card-body">
+                    Campo
+                    <strong>{{ $history->fieldName() }}</strong> actualizado de {{ $history->oldValue() }} a
+                    {{ $history->newValue() }}
                 </div>
-            @endforeach
 
-        </div>
+                @if ($lastUpdateDate != $history->updated_at && $cardOpen)
+                    </div> <!-- fin de div card -->
+
+                    @php
+                        $cardOpen = false;
+                    @endphp
+                @endif
+            @endforeach
+    </div>
     </div>
 
 @stop

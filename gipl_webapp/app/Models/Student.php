@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Venturecraft\Revisionable\Revisionable;
 
-class Student extends Model
+class Student extends Revisionable
 {
     use HasFactory;
 
@@ -22,5 +23,10 @@ class Student extends Model
     public function computer() {
 
         return $this->belongsTo(Computer::class);
+    }
+
+    public function identifiableName()
+    {
+        return $this->name;
     }
 }
