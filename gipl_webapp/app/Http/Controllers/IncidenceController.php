@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Requests\IncidenceRequest;
 use App\Models\Classroom;
 use App\Models\Incidence;
-use App\Models\IncidenceHistories;
 use App\Models\State;
 use Illuminate\Http\Request;
 
@@ -56,8 +55,7 @@ class IncidenceController extends Controller
      */
     public function show(Incidence $incidence)
     {
-        $histories = $incidence->incidenceHistories()->get();
-        return view('app.incidences.show', compact('incidence', 'histories'));
+        return view('app.incidences.show', compact('incidence'));
     }
 
     /**
