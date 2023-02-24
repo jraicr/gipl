@@ -65,13 +65,16 @@
                             <td>{{ $incidence->created_at }}</td>
 
                             <td><a class="btn btn-info" href="{{ route('app.incidences.show', $incidence) }}">Ver</td>
-                            <td><a class="btn btn-primary" href="{{ route('app.incidences.edit', $incidence) }}">Editar
-                            </td>
-                            <td>
-                                {!! Form::model('incidence', ['route' => ['app.incidences.destroy', $incidence], 'method' => 'DELETE']) !!}
-                                {!! Form::submit('Eliminar', ['class' => 'btn btn-danger remove-incidence']) !!}
-                                {!! Form::close() !!}
-                            </td>
+
+                            @if ($incidence->user_id == auth()->user()->id || auth()->user()->id == 1)
+                                <td><a class="btn btn-primary" href="{{ route('app.incidences.edit', $incidence) }}">Editar
+                                </td>
+                                <td>
+                                    {!! Form::model('incidence', ['route' => ['app.incidences.destroy', $incidence], 'method' => 'DELETE']) !!}
+                                    {!! Form::submit('Eliminar', ['class' => 'btn btn-danger remove-incidence']) !!}
+                                    {!! Form::close() !!}
+                                </td>
+                            @endif
                         </tr>
                     @endforeach
                 </tbody>
