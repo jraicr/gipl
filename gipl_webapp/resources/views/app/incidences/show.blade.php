@@ -97,6 +97,9 @@
 
         </div>
 
+        @if ($incidence->revisionHistory->Count())
+
+
         <div class="card-footer">
             <h4 class="mt-4">Histórico</h4>
 
@@ -143,6 +146,7 @@
                 @endif
             @endforeach
     </div>
+    @endif
     </div>
 
 @stop
