@@ -29,12 +29,12 @@ Route::get('profile', [ProfileController::class, 'index']);
 //Route::get('incidences', [IncidenceController::class, 'index'])->name('app.incidences.index');
 Route::resource('incidences', IncidenceController::class)->names('app.incidences');
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified'
+// ])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });
