@@ -309,94 +309,115 @@ return [
         [
             'text'        => 'Dashboard',
             'route'       => 'app.dashboard',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fas fa-tachometer-alt fa-fw mr-2',
             'label_color' => 'success',
+            // 'can'         => 'app.dashboard'
         ],
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
             'can'  => 'manage-blog',
         ],
-        ['header' => 'GESTIÓN DE INCIDENCIAS'],
+        ['header' => 'GESTIÓN DE INCIDENCIAS', 'can' => 'app.incidences.index'],
          [
              'text'        => 'Listado de incidencias',
              'route'       => 'app.incidences.index',
-             'icon'        => 'far fa-fw fa-file',
+             'icon'        => 'fas fa-solid fa-list mr-2',
              //'label'       => 4,
              'label_color' => 'success',
+             'can'         => 'app.incidences.index'
          ],
          [
             'text'        => 'Crear incidencia',
             'route'       => 'app.incidences.create',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fa fa-solid fa-plus mr-2',
             //'label'       => 4,
             'label_color' => 'success',
+            'can'         => 'app.incidences.create'
         ],
+
+        ['header' => 'GESTIÓN DE USUARIOS', 'can' => 'app.users.index'],
+        [
+            'text'        => 'Usuarios',
+            'route'       => 'app.users.index',
+            'icon'        => 'fas fa-users fa-fw mr-2',
+            'label_color' => 'success',
+            'can'         => 'app.users.index'
+        ],
+        [
+            'text'        => 'Listado de roles',
+            'route'       => 'app.roles.index',
+            'icon'        => 'fas fa-users-cog fa-fw mr-2',
+            'label_color' => 'success',
+            'can'         => 'app.roles.index'
+        ],
+
         ['header' => 'account_settings'],
+
         [
             'text' => 'profile',
             'url'  => 'profile',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-user mr-2',
         ],
         // [
         //     'text' => 'change_password',
         //     'url'  => 'admin/settings',
         //     'icon' => 'fas fa-fw fa-lock',
         // ],
-        [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
-        ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+        // [
+        //     'text'    => 'multilevel',
+        //     'icon'    => 'fas fa-fw fa-share',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //         [
+        //             'text'    => 'level_one',
+        //             'url'     => '#',
+        //             'submenu' => [
+        //                 [
+        //                     'text' => 'level_two',
+        //                     'url'  => '#',
+        //                 ],
+        //                 [
+        //                     'text'    => 'level_two',
+        //                     'url'     => '#',
+        //                     'submenu' => [
+        //                         [
+        //                             'text' => 'level_three',
+        //                             'url'  => '#',
+        //                         ],
+        //                         [
+        //                             'text' => 'level_three',
+        //                             'url'  => '#',
+        //                         ],
+        //                     ],
+        //                 ],
+        //             ],
+        //         ],
+        //         [
+        //             'text' => 'level_one',
+        //             'url'  => '#',
+        //         ],
+        //     ],
+        // ],
+        // ['header' => 'labels'],
+        // [
+        //     'text'       => 'important',
+        //     'icon_color' => 'red',
+        //     'url'        => '#',
+        // ],
+        // [
+        //     'text'       => 'warning',
+        //     'icon_color' => 'yellow',
+        //     'url'        => '#',
+        // ],
+        // [
+        //     'text'       => 'information',
+        //     'icon_color' => 'cyan',
+        //     'url'        => '#',
+        // ],
     ],
 
     /*
