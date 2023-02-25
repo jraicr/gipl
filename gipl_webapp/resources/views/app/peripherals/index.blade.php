@@ -36,13 +36,12 @@
                             <td>{{ $peripheral->id }} </td>
                             <td>{{ $peripheral->computer->num }} </td>
                             <td>{{ $peripheral->name }} </td>
-                            <td>{{ $incidence->peripheral->name }} </td>
 
-                            <!-- @if ($incidence->student != null)
-                                <td>{{ $incidence->student->name }} </td>
+                            {{-- <!-- @if ($incidence->student != null) --}}
+                                {{-- <td>{{ $incidence->student->name }} </td>
                             @else
                                 <td>Sin estudiante asignado</td>
-                            @endif -->
+                            @endif --> --}}
                             <td>{{ $peripheral->created_at }}</td>
 
                             <td><a class="btn btn-info" href="{{ route('app.peripherals.show', $peripheral) }}">Ver</td>

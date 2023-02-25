@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\PeripheralRequest;
+
+use App\Models\Peripheral;
+use App\Models\Classroom;
 
 class PeripheralController extends Controller
 {
@@ -13,7 +17,7 @@ class PeripheralController extends Controller
      */
     public function index()
     {
-        $peripherals = Peripheral::lastest('id')->paginate(20);
+        $peripherals = Peripheral::latest('id')->paginate(20);
         return view('app.peripherals.index', compact('peripherals'));
     }
 
@@ -32,34 +36,39 @@ class PeripheralController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \Illuminate\Http\PeripheralRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PeripheralRequest $request)
     {
-        
+        $peripheral = Peripheral::create($request->all());
+
+        return redirect()->route('app.peripherals.show', $peripheral)->with('info', 'El periférico se creó con éxito');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  Peripheral  $peripheral
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Peripheral $peripheral)
     {
-        //
+        return view('app.peripherals.show', compact('peripheral'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Peripheral  $peripheral
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Peripheral $peripheral)
     {
-        //
+        //$this->authorize('author', $peripheral);
+        $classrooms = Classroom::pluck('num', 'id');
+
+        return view('app.peripherals.edit', compact('peripheral', 'classrooms'));
     }
 
     /**
