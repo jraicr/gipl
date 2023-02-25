@@ -335,7 +335,21 @@ return [
             'label_color' => 'success',
             'can'         => 'app.incidences.create'
         ],
-
+        ['header' => 'GESTIÓN DE PERIFÉRICOS'],
+         [
+             'text'        => 'Listado de periféricos',
+             'route'       => 'app.peripherals.index',
+             'icon'        => 'fa fas far fa-computer-mouse',
+             //'label'       => 4,
+             'label_color' => 'success',
+         ],
+         [
+            'text'        => 'Crear periférico',
+            'route'       => 'app.peripherals.create',
+            'icon'        => 'fa fa-solid fa-plus mr-2',
+            //'label'       => 4,
+            'label_color' => 'success',
+        ],
         ['header' => 'GESTIÓN DE USUARIOS', 'can' => 'app.users.index'],
         [
             'text'        => 'Usuarios',
