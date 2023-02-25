@@ -67,16 +67,21 @@
                             @endif
                             <td>{{ $incidence->created_at }}</td>
 
-                            <td><a class="btn btn-info" href="{{ route('app.incidences.show', $incidence) }}">Ver</td>
+                            <td>
+                                @can('app.incidences.show')
+                                    <a class="btn btn-info" href="{{ route('app.incidences.show', $incidence) }}">Ver</a>
+                                @endcan
+
+                            </td>
 
                                 <td>
-                                     @if ($incidence->user_id == auth()->user()->id || auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Gestor de incidencias'))
+                                     @if ($incidence->user_id == auth()->user()->id && auth()->user()->can('app.incidences.edit') || auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Gestor de incidencias'))
                                          <a class="btn btn-primary" href="{{ route('app.incidences.edit', $incidence) }}">Editar</a>
                                      @endif
                                 </td>
 
                                 <td>
-                                    @if ($incidence->user_id == auth()->user()->id || auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Gestor de incidencias'))
+                                    @if ($incidence->user_id == auth()->user()->id && auth()->user()->can('app.incidences.destroy') || auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Gestor de incidencias'))
                                         {!! Form::model('incidence', ['route' => ['app.incidences.destroy', $incidence], 'method' => 'DELETE']) !!}
                                         {!! Form::submit('Eliminar', ['class' => 'btn btn-danger remove-incidence']) !!}
                                         {!! Form::close() !!}

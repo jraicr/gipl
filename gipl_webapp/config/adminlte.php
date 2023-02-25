@@ -309,19 +309,10 @@ return [
         [
             'text'        => 'Dashboard',
             'route'       => 'app.dashboard',
-            'icon'        => 'fas fa-tachometer-alt fa-fw',
+            'icon'        => 'fas fa-tachometer-alt fa-fw mr-2',
             'label_color' => 'success',
             // 'can'         => 'app.dashboard'
         ],
-
-        [
-            'text'        => 'Usuarios',
-            'route'       => 'app.users.index',
-            'icon'        => 'fas fa-users fa-fw',
-            'label_color' => 'success',
-            'can'         => 'app.users.index'
-        ],
-
         [
             'text' => 'blog',
             'url'  => 'admin/blog',
@@ -331,7 +322,7 @@ return [
          [
              'text'        => 'Listado de incidencias',
              'route'       => 'app.incidences.index',
-             'icon'        => 'far fa-fw fa-file',
+             'icon'        => 'fas fa-solid fa-list mr-2',
              //'label'       => 4,
              'label_color' => 'success',
              'can'         => 'app.incidences.index'
@@ -339,10 +330,26 @@ return [
          [
             'text'        => 'Crear incidencia',
             'route'       => 'app.incidences.create',
-            'icon'        => 'far fa-fw fa-file',
+            'icon'        => 'fa fa-solid fa-plus mr-2',
             //'label'       => 4,
             'label_color' => 'success',
             'can'         => 'app.incidences.create'
+        ],
+
+        ['header' => 'GESTIÓN DE USUARIOS', 'can' => 'app.users.index'],
+        [
+            'text'        => 'Usuarios',
+            'route'       => 'app.users.index',
+            'icon'        => 'fas fa-users fa-fw mr-2',
+            'label_color' => 'success',
+            'can'         => 'app.users.index'
+        ],
+        [
+            'text'        => 'Listado de roles',
+            'route'       => 'app.roles.index',
+            'icon'        => 'fas fa-users-cog fa-fw mr-2',
+            'label_color' => 'success',
+            'can'         => 'app.roles.index'
         ],
 
         ['header' => 'account_settings'],
@@ -350,7 +357,7 @@ return [
         [
             'text' => 'profile',
             'url'  => 'profile',
-            'icon' => 'fas fa-fw fa-user',
+            'icon' => 'fas fa-fw fa-user mr-2',
         ],
         // [
         //     'text' => 'change_password',
