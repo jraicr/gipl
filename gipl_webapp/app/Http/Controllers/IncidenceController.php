@@ -10,6 +10,16 @@ use Illuminate\Http\Request;
 
 class IncidenceController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:app.incidences.index')->only('index');
+        $this->middleware('can:app.incidences.show')->only('show');
+        $this->middleware('can:app.incidences.create')->only('create', 'store');
+        $this->middleware('can:app.incidences.edit')->only('edit', 'update');
+        $this->middleware('can:app.incidences.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *

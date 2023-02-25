@@ -21,7 +21,7 @@
                     class="text-md badge badge-primary badge-pill text-justify ml-2">{{ $displayState }}</span></h1>
         </div>
 
-        @if ($incidence->user_id == auth()->user()->id || auth()->user()->id == 1)
+        @if ($incidence->user_id == auth()->user()->id || auth()->user()->hasRole('Admin')|| auth()->user()->hasRole('Gestor de incidencias'))
             <div class="card-footer">
                 <div class="d-flex flex-row">
                     <a class="btn btn-primary btn-sm mr-2" href="{{ route('app.incidences.edit', $incidence) }}">Editar</a>

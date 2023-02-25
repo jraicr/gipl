@@ -12,13 +12,12 @@ class IncidencePolicy
 
     public function author(User $user, Incidence $incidence) {
 
-        if ($user->id == $incidence->user_id || $user->id == 1) {
+        if ($user->id == $incidence->user_id || $user->hasRole('Admin') || $user->hasRole('Gestor de incidencias')) {
             return true;
 
         } else {
             return false;
         }
-
     }
 
     /**
