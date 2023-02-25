@@ -9,9 +9,9 @@
 @section('content')
 
     @if (!auth()->user()->roles()->get()->Count())
-    <div class="alert alert-info" role="alert">
-        Debes contactar con un administrador para que te asigne un rol de usuario.
-      </div>
+        <div class="alert alert-info" role="alert">
+            Debes contactar con un administrador para que te asigne un rol de usuario.
+        </div>
     @endif
 
 @stop
