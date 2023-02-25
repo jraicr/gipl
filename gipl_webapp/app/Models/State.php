@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Venturecraft\Revisionable\Revisionable;
 
-class State extends Model
+class State extends Revisionable
 {
     use HasFactory;
 
@@ -17,5 +18,10 @@ class State extends Model
     public function incidences() {
 
         return $this->hasMany(Incidence::class);
+    }
+
+    public function identifiableName()
+    {
+        return $this->name;
     }
 }

@@ -5,6 +5,8 @@ use App\Http\Controllers\IncidenceController;
 use App\Http\Controllers\PeripheralController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\RoleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,18 +27,20 @@ use Illuminate\Support\Facades\Route;
 // Cargamos la vista de login cuando el usuario entra en la raiz de la APP
 
 Route::get('/', [HomeController::class, 'index'])->name('app.dashboard');
+
 Route::get('profile', [ProfileController::class, 'index']);
 
-//Route::get('incidences', [IncidenceController::class, 'index'])->name('app.incidences.index');
 Route::resource('incidences', IncidenceController::class)->names('app.incidences');
 Route::resource('peripherals', PeripheralController::class)->names('app.peripherals');
+Route::resource('users', UserController::class)->only(['index', 'edit', 'update'])->names('app.users');
+Route::resource('roles', RoleController::class)->except('show')->names('app.roles');
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    })->name('dashboard');
-});
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified'
+// ])->group(function () {
+//     Route::get('/dashboard', function () {
+//         return view('dashboard');
+//     })->name('dashboard');
+// });

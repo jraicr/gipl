@@ -5,12 +5,21 @@ namespace App\Http\Controllers;
 use App\Http\Requests\IncidenceRequest;
 use App\Models\Classroom;
 use App\Models\Incidence;
-use App\Models\IncidenceHistories;
 use App\Models\State;
 use Illuminate\Http\Request;
 
 class IncidenceController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('can:app.incidences.index')->only('index');
+        $this->middleware('can:app.incidences.show')->only('show');
+        $this->middleware('can:app.incidences.create')->only('create', 'store');
+        $this->middleware('can:app.incidences.edit')->only('edit', 'update');
+        $this->middleware('can:app.incidences.destroy')->only('destroy');
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -56,8 +65,7 @@ class IncidenceController extends Controller
      */
     public function show(Incidence $incidence)
     {
-        $histories = $incidence->incidenceHistories()->get();
-        return view('app.incidences.show', compact('incidence', 'histories'));
+        return view('app.incidences.show', compact('incidence'));
     }
 
     /**
@@ -68,7 +76,7 @@ class IncidenceController extends Controller
      */
     public function edit(Incidence $incidence)
     {
-
+        $this->authorize('author', $incidence);
         $states = State::all();
         $classrooms = Classroom::pluck('num', 'id');
 
@@ -84,11 +92,10 @@ class IncidenceController extends Controller
      */
     public function update(IncidenceRequest $request, Incidence $incidence)
     {
+        $this->authorize('author', $incidence);
         $incidence->update($request->all());
 
         return redirect()->route('app.incidences.show', $incidence)->with('info', 'La incidencia se actualizó con éxito');
-
-
     }
 
     /**
@@ -99,6 +106,7 @@ class IncidenceController extends Controller
      */
     public function destroy(Incidence $incidence)
     {
+        $this->authorize('author', $incidence);
         $incidence->delete();
 
         return redirect()->route('app.incidences.index')->with('info', 'La incidencia se eliminó correctamente.');

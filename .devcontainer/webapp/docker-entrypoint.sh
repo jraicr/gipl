@@ -1,4 +1,6 @@
 #!/bin/sh
+composer install
+npm install
 
 # PHP FPM Serves the Laravel APP (Recommended to be used in production environment)
 #php-fpm 

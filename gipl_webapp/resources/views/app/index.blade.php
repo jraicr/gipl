@@ -7,7 +7,13 @@
 @stop
 
 @section('content')
-    <p>Bienvenido al panel de control del administrador.</p>
+
+    @if (!auth()->user()->roles()->get()->Count())
+        <div class="alert alert-info" role="alert">
+            Debes contactar con un administrador para que te asigne un rol de usuario.
+        </div>
+    @endif
+
 @stop
 
 @section('css')

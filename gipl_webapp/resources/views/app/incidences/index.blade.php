@@ -18,7 +18,10 @@
 
     <div class="card">
         <div class="card-header">
-            <a class="btn btn-primary" href="{{ route('app.incidences.create') }}">Crear incidencia</a>
+            @can('app.incidences.create')
+                <a class="btn btn-primary" href="{{ route('app.incidences.create') }}">Crear incidencia</a>
+            @endcan
+
         </div>
         <div class="card-body">
             <table class="table table-striped">
@@ -64,14 +67,26 @@
                             @endif
                             <td>{{ $incidence->created_at }}</td>
 
-                            <td><a class="btn btn-info" href="{{ route('app.incidences.show', $incidence) }}">Ver</td>
-                            <td><a class="btn btn-primary" href="{{ route('app.incidences.edit', $incidence) }}">Editar
-                            </td>
                             <td>
-                                {!! Form::model('incidence', ['route' => ['app.incidences.destroy', $incidence], 'method' => 'DELETE']) !!}
-                                {!! Form::submit('Eliminar', ['class' => 'btn btn-danger remove-incidence']) !!}
-                                {!! Form::close() !!}
+                                @can('app.incidences.show')
+                                    <a class="btn btn-info" href="{{ route('app.incidences.show', $incidence) }}">Ver</a>
+                                @endcan
+
                             </td>
+
+                                <td>
+                                     @if ($incidence->user_id == auth()->user()->id && auth()->user()->can('app.incidences.edit') || auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Gestor de incidencias'))
+                                         <a class="btn btn-primary" href="{{ route('app.incidences.edit', $incidence) }}">Editar</a>
+                                     @endif
+                                </td>
+
+                                <td>
+                                    @if ($incidence->user_id == auth()->user()->id && auth()->user()->can('app.incidences.destroy') || auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Gestor de incidencias'))
+                                        {!! Form::model('incidence', ['route' => ['app.incidences.destroy', $incidence], 'method' => 'DELETE']) !!}
+                                        {!! Form::submit('Eliminar', ['class' => 'btn btn-danger remove-incidence']) !!}
+                                        {!! Form::close() !!}
+                                    @endif
+                                </td>
                         </tr>
                     @endforeach
                 </tbody>
@@ -123,7 +138,7 @@
 
             function showConfirmationModal(e) {
 
-                e.preventDefault();  // Evitamos que el botón de eliminar ejecute el submit.
+                e.preventDefault(); // Evitamos que el botón de eliminar ejecute el submit.
 
                 // Cacheamos el elemento del botón que se ha pulsado originalmente,
                 //  para rescatar la fila de la incidencia en la tabla posteriormente.
