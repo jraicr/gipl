@@ -21,7 +21,7 @@ class StudentFactory extends Factory
         return [
             'name' => $this->faker->firstName(),
             'surname' => $this->faker->lastName(),
-            'group_num' => $this->faker->numerify('grupo-##'),
+            'group_num' => $this->faker->numerify('##'),
             'scholar_group_id' => ScholarGroup::all()->random()->id,
             'computer_id' => Computer::all()->random()->id
         ];
