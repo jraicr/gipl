@@ -26,8 +26,6 @@ class PeripheralController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', Peripheral::class);
-
         $peripherals = Peripheral::latest('id')->paginate(20);
         return view('app.peripherals.index', compact('peripherals'));
     }
@@ -39,8 +37,6 @@ class PeripheralController extends Controller
      */
     public function create()
     {
-        $this->authorize('create', Peripheral::class);
-
         $classrooms = Classroom::pluck('num', 'id');
 
         return view('app.peripherals.create', compact('classrooms'));
@@ -54,8 +50,6 @@ class PeripheralController extends Controller
      */
     public function store(PeripheralRequest $request)
     {
-        $this->authorize('create', Peripheral::class);
-
         $peripheral = Peripheral::create($request->all());
 
         return redirect()->route('app.peripherals.show', $peripheral)->with('info', 'El periférico se creó con éxito');
@@ -69,8 +63,6 @@ class PeripheralController extends Controller
      */
     public function show(Peripheral $peripheral)
     {
-        $this->authorize('view', Peripheral::class);
-
         return view('app.peripherals.show', compact('peripheral'));
     }
 
@@ -82,8 +74,6 @@ class PeripheralController extends Controller
      */
     public function edit(Peripheral $peripheral)
     {
-        $this->authorize('update', Peripheral::class);
-
         $classrooms = Classroom::pluck('num', 'id');
 
         return view('app.peripherals.edit', compact('peripheral', 'classrooms'));
@@ -98,8 +88,6 @@ class PeripheralController extends Controller
      */
     public function update(PeripheralRequest $request, Peripheral $peripheral)
     {
-        $this->authorize('update', Peripheral::class);
-
         $peripheral->update($request->all());
 
         return redirect()->route('app.peripherals.show', $peripheral)->with('info', 'Los datos del periférico se actualizaron con éxito.');
@@ -113,8 +101,6 @@ class PeripheralController extends Controller
      */
     public function destroy(Peripheral $peripheral)
     {
-        $this->authorize('delete', Peripheral::class);
-        
         $peripheral->delete();
 
         return redirect()->route('app.peripherals.index')->with('info', 'El periférico se eliminó correctamente.');
