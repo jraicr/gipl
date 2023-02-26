@@ -134,7 +134,7 @@ return [
         'array' => 'El :attribute debe contener elementos :size.',
         'file' => 'El :attribute debe ser :size kilobytes.',
         'numeric' => 'El :attribute debe ser :size.',
-        'string' => 'El :attribute debe tener caracteres de tamaño :.',
+        'string' => 'El :attribute debe tener :size caracteres de longitud.',
     ],
     'starts_with' => 'El :attribute debe comenzar con uno de los siguientes: :values.',
     'string' => 'El :attribute debe ser una cadena.',

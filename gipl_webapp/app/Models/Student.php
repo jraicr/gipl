@@ -10,6 +10,8 @@ class Student extends Revisionable
 {
     use HasFactory;
 
+    protected $guarded = ['id', 'created_at', 'updated_at'];
+
     public function incidences() {
 
         return $this->hasMany(Incidence::class);
