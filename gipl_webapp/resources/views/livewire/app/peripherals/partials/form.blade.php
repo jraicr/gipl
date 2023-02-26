@@ -44,7 +44,7 @@
 
         {!! Form::text('name', null, [
             'class' => 'form-control',
-            'placeholder' => 'Escribe el nombre del periférico...' /* . $peripheral->name*/,
+            'placeholder' => 'Escribe el nombre del periférico...',
             'wire:ignore',
         ]) !!}
 

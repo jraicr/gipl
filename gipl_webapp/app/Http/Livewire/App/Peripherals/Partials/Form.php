@@ -29,14 +29,18 @@ class Form extends Component
             $computers = Computer::where('classroom_id', $this->selectedClassroomID)->get()->pluck('num', 'id');
 
         } else {
-            // Deseleccionamos todo lo que sucede al aula
             $this->selectedComputerID = "";
+        }
+
+        if ($this->selectedComputerID != null) {
+
+            $selectedComputer = $this->selectedComputerID;
         }
 
         $classrooms = $this->classrooms;
         $peripheral = $this->peripheral;
 
-        return view('livewire.app.peripherals.partials.form', compact('peripheral', 'classrooms', 'computers'));
+        return view('livewire.app.peripherals.partials.form', compact('peripheral', 'classrooms', 'computers', 'selectedComputer'));
     }
 
     public function mount()
@@ -44,6 +48,9 @@ class Form extends Component
         if (old('classroom_id') || old('computer_id')) {
             $this->selectedClassroomID = old('classroom_id');
             $this->selectedComputerID = old('computer_id');
+        } else if ($this->peripheral) {
+            $this->selectedClassroomID = $this->peripheral->computer->classroom_id;
+            $this->selectedComputerID = $this->peripheral->computer->id;
         }
     }
 }
