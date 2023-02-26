@@ -180,22 +180,22 @@ class RoleSeeder extends Seeder
 
         // Permisos ScholarGroup
         Permission::create([
-            'name' => 'app.scholargroup.index',
+            'name' => 'app.scholar_groups.index',
             'description' => 'Ver listado de grupos escolares'
         ])->syncRoles([$roleAdmin, $roleTeacher]);
 
         Permission::create([
-            'name' => 'app.scholargroup.create',
+            'name' => 'app.scholar_groups.create',
             'description' => 'Crear grupos escolares'
         ])->syncRoles([$roleAdmin]);
 
         Permission::create([
-            'name' => 'app.scholargroup.edit',
+            'name' => 'app.scholar_groups.edit',
             'description' => 'Editar grupos escolares'
         ])->syncRoles([$roleAdmin]);
 
         Permission::create([
-            'name' => 'app.scholargroup.destroy',
+            'name' => 'app.scholar_groups.destroy',
             'description' => 'Eliminar grupos escolares'
         ])->syncRoles([$roleAdmin]);
     }
