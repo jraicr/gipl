@@ -16,20 +16,24 @@
             <h1>Periférico Nº {{ $peripheral->id }}</h1>
         </div>
 
-        @if (auth()->user()->hasRole('Admin'))
-            <div class="card-footer">
-                <div class="d-flex flex-row">
-                    <a class="btn btn-primary btn-sm mr-2" href="{{ route('app.peripherals.edit', $peripheral) }}">Editar</a>
 
+        <div class="card-footer">
+            <div class="d-flex flex-row">
+                @can('app.peripherals.edit')
+                    <a class="btn btn-primary btn-sm mr-2" href="{{ route('app.peripherals.edit', $peripheral) }}">Editar</a>
+                @endcan
+
+                @can('app.peripherals.destroy')
                     <form action="{{ route('app.peripherals.destroy', $peripheral) }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
                     </form>
+                @endcan
 
-                </div>
             </div>
-        @endif
+        </div>
+
     </div>
 @stop
 
