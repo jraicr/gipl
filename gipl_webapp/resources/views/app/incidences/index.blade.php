@@ -42,7 +42,11 @@
                     @foreach ($incidences as $incidence)
                         <tr>
                             <td>{{ $incidence->id }} </td>
-                            <td>{{ $incidence->peripheral->computer->classroom->num }} </td>
+                            @if ($incidence->peripheral->computer->classroom)
+                                <td>{{ $incidence->peripheral->computer->classroom->num }} </td>
+                            @else
+                                <td>Sin aula asociada</td>
+                            @endif
                             <td>{{ $incidence->peripheral->computer->num }} </td>
                             <td>{{ $incidence->peripheral->name }} </td>
 
@@ -74,21 +78,31 @@
 
                             </td>
 
-                                <td>
-                                     @if ($incidence->user_id == auth()->user()->id && auth()->user()->can('app.incidences.edit') || auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Gestor de incidencias'))
-                                         <a class="btn btn-primary" href="{{ route('app.incidences.edit', $incidence) }}">Editar</a>
-                                     @endif
-                                </td>
+                            <td>
+                                @if (
+                                    ($incidence->user_id == auth()->user()->id &&
+                                        auth()->user()->can('app.incidences.edit')) ||
+                                        auth()->user()->hasRole('Admin') ||
+                                        auth()->user()->hasRole('Gestor de incidencias'))
+                                    <a class="btn btn-primary"
+                                        href="{{ route('app.incidences.edit', $incidence) }}">Editar</a>
+                                @endif
+                            </td>
 
-                                <td>
-                                    @if ($incidence->user_id == auth()->user()->id && auth()->user()->can('app.incidences.destroy') || auth()->user()->hasRole('Admin') || auth()->user()->hasRole('Gestor de incidencias'))
-                                        {!! Form::model('incidence', ['route' => ['app.incidences.destroy', $incidence], 'method' => 'DELETE']) !!}
-                                        {!! Form::submit('Eliminar', ['class' => 'btn btn-danger remove-incidence']) !!}
-                                        {!! Form::close() !!}
-                                    @endif
-                                </td>
+                            <td>
+                                @if (
+                                    ($incidence->user_id == auth()->user()->id &&
+                                        auth()->user()->can('app.incidences.destroy')) ||
+                                        auth()->user()->hasRole('Admin') ||
+                                        auth()->user()->hasRole('Gestor de incidencias'))
+                                    {!! Form::model('incidence', ['route' => ['app.incidences.destroy', $incidence], 'method' => 'DELETE']) !!}
+                                    {!! Form::submit('Eliminar', ['class' => 'btn btn-danger remove-incidence']) !!}
+                                    {!! Form::close() !!}
+                                @endif
+                            </td>
                         </tr>
                     @endforeach
+
                 </tbody>
             </table>
             {{ $incidences->links('pagination::bootstrap-5') }}

@@ -3,7 +3,7 @@
 @section('title', 'GIPL')
 
 @section('content_header')
-    <h1>Editando incidencia nº {{$incidence->id}}</h1>
+    <h1>Editando incidencia nº {{ $incidence->id }}</h1>
 @stop
 
 @section('content')
@@ -16,19 +16,31 @@
         </div>
     @endif
 
+    @if (!$incidence->computer->classroom)
+        <div class="alert alert-warning alert-dismissible fade show" id="alert" role="alert">
+            Esta incidencia pertenece al periferico <strong> {{$incidence->peripheral->name}} </strong> del ordenador <strong>{{$incidence->computer->num}}</strong> y no cuenta con un aula asociada</strong>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                    aria-hidden="true">&times;</span></button>
+        </div>
+    @endif
+
 
     <div class="card">
 
-         {{-- <div class="card-header">
+        {{-- <div class="card-header">
 
         </div> --}}
 
         <div class="card-body">
 
 
-            {!! Form::model($incidence, ['route' => ['app.incidences.update', $incidence], 'autocomplete' => 'off', 'method' => 'put']) !!}
+            {!! Form::model($incidence, [
+                'route' => ['app.incidences.update', $incidence],
+                'autocomplete' => 'off',
+                'method' => 'put',
+            ]) !!}
 
-                @livewire('app.incidences.partials.form', ['incidence' => $incidence, 'states' => $states, 'classrooms' => $classrooms])
+            @livewire('app.incidences.partials.form', ['incidence' => $incidence, 'states' => $states, 'classrooms' => $classrooms])
 
         </div>
 
