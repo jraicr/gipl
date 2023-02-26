@@ -352,6 +352,21 @@ return [
             'label_color' => 'success',
             'can'         => 'app.peripherals.create'
         ],
+        ['header' => 'GESTIÓN DE AULAS', 'can' => 'app.classrooms.index'],
+        [
+            'text'        => 'Listado de aulas',
+            'route'       => 'app.classrooms.index',
+            'icon'        => 'fa fa-solid fa-book mr-2',
+            'label_color' => 'success',
+            'can'         => 'app.classrooms.index'
+        ],
+        [
+            'text'        => 'Añadir aula',
+            'route'       => 'app.classrooms.create',
+            'icon'        => 'fa fa-solid fa-plus mr-2',
+            'label_color' => 'success',
+            'can'         => 'app.classrooms.create'
+        ],
         ['header' => 'GESTIÓN DE ALUMNOS', 'can' => 'app.students.index'],
          [
              'text'        => 'Listado de alumnos',

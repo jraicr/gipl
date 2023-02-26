@@ -93,11 +93,6 @@ class RoleSeeder extends Seeder
         ])->syncRoles([$roleAdmin, $roleTeacher]);
 
         Permission::create([
-            'name' => 'app.classrooms.show',
-            'description' => 'Ver detalles del aula'
-        ])->syncRoles([$roleAdmin, $roleTeacher]);
-
-        Permission::create([
             'name' => 'app.classrooms.create',
             'description' => 'Crear aulas'
         ])->syncRoles([$roleAdmin]);

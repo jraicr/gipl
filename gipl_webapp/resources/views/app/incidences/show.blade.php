@@ -21,7 +21,10 @@
                     class="text-md badge badge-primary badge-pill text-justify ml-2">{{ $displayState }}</span></h1>
         </div>
 
-        @if ($incidence->user_id == auth()->user()->id || auth()->user()->hasRole('Admin')|| auth()->user()->hasRole('Gestor de incidencias'))
+        @if (
+            $incidence->user_id == auth()->user()->id ||
+                auth()->user()->hasRole('Admin') ||
+                auth()->user()->hasRole('Gestor de incidencias'))
             <div class="card-footer">
                 <div class="d-flex flex-row">
                     <a class="btn btn-primary btn-sm mr-2" href="{{ route('app.incidences.edit', $incidence) }}">Editar</a>
@@ -65,7 +68,20 @@
 
         <div class="card-body">
 
-            <h2>Aula {{ $incidence->computer->classroom->num }}</h2>
+            @if ($incidence->computer->classroom)
+                <h2>Aula {{ $incidence->computer->classroom->num }}</h2>
+            @else
+                @if (!$incidence->computer->classroom)
+                    <div class="alert alert-warning alert-dismissible fade show" id="alert" role="alert">
+                        Esta incidencia pertenece al periferico <strong> {{ $incidence->peripheral->name }} </strong> del
+                        ordenador <strong>{{ $incidence->computer->num }}</strong> y no cuenta con un aula
+                        asociada</strong>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                                aria-hidden="true">&times;</span></button>
+                    </div>
+                @endif
+            @endif
+
 
             <hr>
 
