@@ -356,14 +356,14 @@ return [
         [
             'text'        => 'Listado de aulas',
             'route'       => 'app.classrooms.index',
-            'icon'        => 'fas fa-users fa-fw mr-2',
+            'icon'        => 'fa fa-solid fa-book mr-2',
             'label_color' => 'success',
             'can'         => 'app.classrooms.index'
         ],
         [
-            'text'        => 'Crear aula',
+            'text'        => 'Añadir aula',
             'route'       => 'app.classrooms.create',
-            'icon'        => 'fas fa-users-cog fa-fw mr-2',
+            'icon'        => 'fa fa-solid fa-plus mr-2',
             'label_color' => 'success',
             'can'         => 'app.classrooms.create'
         ],
