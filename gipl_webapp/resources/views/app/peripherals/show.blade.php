@@ -16,7 +16,7 @@
             <h1>Periférico Nº {{ $peripheral->id }}</h1>
         </div>
 
-        @if ($peripheral->user_id == auth()->user()->id || auth()->user()->hasRole('Admin')|| auth()->user()->hasRole('Gestor de incidencias'))
+        @if (auth()->user()->hasRole('Admin'))
             <div class="card-footer">
                 <div class="d-flex flex-row">
                     <a class="btn btn-primary btn-sm mr-2" href="{{ route('app.peripherals.edit', $peripheral) }}">Editar</a>
