@@ -84,7 +84,7 @@
 
         </div>
 
-        {{-- @if ($incidence->revisionHistory->Count())
+        @if ($peripheral->revisionHistory->Count())
 
 
             <div class="card-footer">
@@ -95,7 +95,7 @@
                     $cardOpen = false;
                 @endphp
 
-                @foreach ($incidence->revisionHistory as $history)
+                @foreach ($peripheral->revisionHistory as $history)
                     @php
                         $displayUser = isset($history->userResponsible()->name) ? $history->userResponsible()->name : 'usuario eliminado';
                         $day = \Carbon\Carbon::parse($history->updated_at)->format('d');
@@ -133,7 +133,7 @@
         @endif
         @endforeach
     </div>
-    @endif --}}
+    @endif
     </div>
 
 @stop
