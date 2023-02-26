@@ -18,7 +18,9 @@
 
     <div class="card">
         <div class="card-header">
-            <a class="btn btn-primary" href="{{ route('app.peripherals.create') }}">Crear periférico</a>
+            @if (auth()->user()->can('app.peripherals.create') || auth()->user()->hasRole('Admin'))
+                <a class="btn btn-primary" href="{{ route('app.peripherals.create') }}">Crear periférico</a>
+            @endif
         </div>
         <div class="card-body">
             <table class="table table-striped">
@@ -45,12 +47,17 @@
                             <td>{{ $peripheral->created_at }}</td>
 
                             <td><a class="btn btn-info" href="{{ route('app.peripherals.show', $peripheral) }}">Ver</td>
-                            <td><a class="btn btn-primary" href="{{ route('app.peripherals.edit', $peripheral) }}">Editar
+                            <td>
+                                @if (auth()->user()->can('app.peripherals.edit') || auth()->user()->hasRole('Admin'))
+                                    <a class="btn btn-primary" href="{{ route('app.peripherals.edit', $peripheral) }}">Editar</a>
+                                @endif
                             </td>
                             <td>
-                                {!! Form::model('peripheral', ['route' => ['app.peripherals.destroy', $peripheral], 'method' => 'DELETE']) !!}
-                                {!! Form::submit('Eliminar', ['class' => 'btn btn-danger remove-peripheral']) !!}
-                                {!! Form::close() !!}
+                                @if (auth()->user()->can('app.peripherals.destroy') || auth()->user()->hasRole('Admin'))
+                                    {!! Form::model('peripheral', ['route' => ['app.peripherals.destroy', $peripheral], 'method' => 'DELETE']) !!}
+                                    {!! Form::submit('Eliminar', ['class' => 'btn btn-danger remove-peripheral']) !!}
+                                    {!! Form::close() !!}
+                                @endif
                             </td>
                         </tr>
                     @endforeach

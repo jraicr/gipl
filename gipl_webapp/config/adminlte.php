@@ -339,9 +339,10 @@ return [
          [
              'text'        => 'Listado de periféricos',
              'route'       => 'app.peripherals.index',
-             'icon'        => 'fa fas far fa-computer-mouse',
+             'icon'        => 'fa fa-keyboard mr-1',
              //'label'       => 4,
              'label_color' => 'success',
+             'can'         => 'app.peripherals.index'
          ],
          [
             'text'        => 'Crear periférico',
@@ -349,6 +350,7 @@ return [
             'icon'        => 'fa fa-solid fa-plus mr-2',
             //'label'       => 4,
             'label_color' => 'success',
+            'can'         => 'app.peripherals.create'
         ],
         ['header' => 'GESTIÓN DE USUARIOS', 'can' => 'app.users.index'],
         [
