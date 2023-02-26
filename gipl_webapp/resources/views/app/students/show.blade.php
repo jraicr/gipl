@@ -52,8 +52,15 @@
 
         <div class="card-body">
 
-            @if ($student->computer != null)
+            @if ($student->computer != null && $student->computer->classroom != null)
                 <h2>Aula {{ $student->computer->classroom->num }}</h2>
+
+            @elseif ($student->computer != null && $student->computer->classroom == null)
+                <div class="alert alert-warning alert-dismissible fade show" id="alert" role="alert">
+                    <strong>Advertencia:</strong> Este estudiante está asignado a un ordenador <strong>({{$student->computer->num}})</strong> sin aula asignada
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                </div>
             @endif
 
             <hr>
@@ -90,12 +97,12 @@
                         <strong>Ordenador</strong> {{ $student->computer->num }}
                     </li>
                 </ul>
-            @else 
-            <ul class="list-group mb-4">
-                <li class="list-group-item justify-content-between align-items-center">
-                    <strong>Sin ordenador asociado</strong>
-                </li>
-            </ul>
+            @else
+                <ul class="list-group mb-4">
+                    <li class="list-group-item justify-content-between align-items-center">
+                        <strong>Sin ordenador asociado</strong>
+                    </li>
+                </ul>
             @endif
         </div>
 

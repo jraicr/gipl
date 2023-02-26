@@ -20,6 +20,13 @@
         </div>
     @endif
 
+    @if ($student->computer != null && $student->computer->classroom == null)
+        <div class="alert alert-warning alert-dismissible fade show" id="alert" role="alert">
+            <strong>Advertencia:</strong> Este estudiante está asignado a un ordenador <strong>({{$student->computer->num}})</strong> sin aula asignada
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+    @endif
+
 
     <div class="card">
 
