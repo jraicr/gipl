@@ -93,6 +93,11 @@ class RoleSeeder extends Seeder
         ])->syncRoles([$roleAdmin, $roleTeacher]);
 
         Permission::create([
+            'name' => 'app.classrooms.show',
+            'description' => 'Ver detalles del aula'
+        ])->syncRoles([$roleAdmin, $roleTeacher]);
+
+        Permission::create([
             'name' => 'app.classrooms.create',
             'description' => 'Crear aulas'
         ])->syncRoles([$roleAdmin]);
@@ -106,6 +111,7 @@ class RoleSeeder extends Seeder
             'description' => 'Eliminar aulas'
         ])->syncRoles([$roleAdmin]);
 
+
         // Permisos Peripherals
         Permission::create([
             'name' => 'app.peripherals.index',
@@ -114,7 +120,7 @@ class RoleSeeder extends Seeder
 
         Permission::create([
             'name' => 'app.peripherals.show',
-            'description' => 'Ver detalle de periféricos'
+            'description' => 'Ver detalles del periférico'
         ])->syncRoles([$roleAdmin, $roleTeacher]);
 
         Permission::create([
@@ -131,6 +137,7 @@ class RoleSeeder extends Seeder
             'description' => 'Eliminar periféricos'
         ])->syncRoles([$roleAdmin]);
 
+
         // Permisos Computers
         Permission::create([
             'name' => 'app.computers.index',
@@ -139,7 +146,7 @@ class RoleSeeder extends Seeder
 
         Permission::create([
             'name' => 'app.computers.show',
-            'description' => 'Ver detalle de ordenadores'
+            'description' => 'Ver detalles del ordenador'
         ])->syncRoles([$roleAdmin, $roleTeacher]);
 
         Permission::create([
@@ -157,10 +164,16 @@ class RoleSeeder extends Seeder
             'description' => 'Eliminar ordenadores'
         ])->syncRoles([$roleAdmin]);
 
+
         // Permisos Students
         Permission::create([
             'name' => 'app.students.index',
             'description' => 'Ver listado de estudiantes'
+        ])->syncRoles([$roleAdmin, $roleTeacher]);
+
+        Permission::create([
+            'name' => 'app.students.show',
+            'description' => 'Ver detalles del alumno'
         ])->syncRoles([$roleAdmin, $roleTeacher]);
 
         Permission::create([
@@ -178,10 +191,16 @@ class RoleSeeder extends Seeder
             'description' => 'Eliminar estudianes'
         ])->syncRoles([$roleAdmin]);
 
+
         // Permisos ScholarGroup
         Permission::create([
             'name' => 'app.scholar_groups.index',
             'description' => 'Ver listado de grupos escolares'
+        ])->syncRoles([$roleAdmin, $roleTeacher]);
+
+        Permission::create([
+            'name' => 'app.scholar_groups.show',
+            'description' => 'Ver detalles del grupo escolar'
         ])->syncRoles([$roleAdmin, $roleTeacher]);
 
         Permission::create([

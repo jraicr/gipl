@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IncidenceController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\PeripheralController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -32,6 +33,7 @@ Route::get('profile', [ProfileController::class, 'index']);
 
 Route::resource('incidences', IncidenceController::class)->names('app.incidences');
 Route::resource('peripherals', PeripheralController::class)->names('app.peripherals');
+Route::resource('students', StudentController::class)->names('app.students');
 Route::resource('users', UserController::class)->only(['index', 'edit', 'update'])->names('app.users');
 Route::resource('roles', RoleController::class)->except('show')->names('app.roles');
 

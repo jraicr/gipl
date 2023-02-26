@@ -335,7 +335,7 @@ return [
             'label_color' => 'success',
             'can'         => 'app.incidences.create'
         ],
-        ['header' => 'GESTIÓN DE PERIFÉRICOS'],
+        ['header' => 'GESTIÓN DE PERIFÉRICOS', 'can' => 'app.peripherals.index'],
          [
              'text'        => 'Listado de periféricos',
              'route'       => 'app.peripherals.index',
@@ -351,6 +351,23 @@ return [
             //'label'       => 4,
             'label_color' => 'success',
             'can'         => 'app.peripherals.create'
+        ],
+        ['header' => 'GESTIÓN DE ALUMNOS', 'can' => 'app.students.index'],
+         [
+             'text'        => 'Listado de alumnos',
+             'route'       => 'app.students.index',
+             'icon'        => 'fa fa-graduation-cap mr-1',
+             //'label'       => 4,
+             'label_color' => 'success',
+             'can'         => 'app.students.index'
+         ],
+         [
+            'text'        => 'Añadir alumno',
+            'route'       => 'app.students.create',
+            'icon'        => 'fa fa-solid fa-plus mr-2',
+            //'label'       => 4,
+            'label_color' => 'success',
+            'can'         => 'app.students.create'
         ],
         ['header' => 'GESTIÓN DE USUARIOS', 'can' => 'app.users.index'],
         [
