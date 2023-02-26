@@ -352,6 +352,21 @@ return [
             'label_color' => 'success',
             'can'         => 'app.peripherals.create'
         ],
+        ['header' => 'GESTIÓN DE AULAS', 'can' => 'app.classrooms.index'],
+        [
+            'text'        => 'Listado de aulas',
+            'route'       => 'app.classrooms.index',
+            'icon'        => 'fas fa-users fa-fw mr-2',
+            'label_color' => 'success',
+            'can'         => 'app.classrooms.index'
+        ],
+        [
+            'text'        => 'Crear aula',
+            'route'       => 'app.classrooms.create',
+            'icon'        => 'fas fa-users-cog fa-fw mr-2',
+            'label_color' => 'success',
+            'can'         => 'app.classrooms.create'
+        ],
         ['header' => 'GESTIÓN DE USUARIOS', 'can' => 'app.users.index'],
         [
             'text'        => 'Usuarios',

@@ -9,6 +9,8 @@ class Classroom extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['num'];
+
     function computers() {
         return $this->hasMany(Computer::class);
     }
