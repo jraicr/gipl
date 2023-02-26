@@ -54,8 +54,6 @@
 
             @if ($student->computer != null)
                 <h2>Aula {{ $student->computer->classroom->num }}</h2>
-            @else
-                <h2>Sin aula asociada</h2>
             @endif
 
             <hr>
@@ -92,6 +90,12 @@
                         <strong>Ordenador</strong> {{ $student->computer->num }}
                     </li>
                 </ul>
+            @else 
+            <ul class="list-group mb-4">
+                <li class="list-group-item justify-content-between align-items-center">
+                    <strong>Sin ordenador asociado</strong>
+                </li>
+            </ul>
             @endif
         </div>
 
