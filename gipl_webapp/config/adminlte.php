@@ -335,7 +335,23 @@ return [
             'label_color' => 'success',
             'can'         => 'app.incidences.create'
         ],
-
+        ['header' => 'GESTIÓN DE PERIFÉRICOS'],
+         [
+             'text'        => 'Listado de periféricos',
+             'route'       => 'app.peripherals.index',
+             'icon'        => 'fa fa-keyboard mr-1',
+             //'label'       => 4,
+             'label_color' => 'success',
+             'can'         => 'app.peripherals.index'
+         ],
+         [
+            'text'        => 'Crear periférico',
+            'route'       => 'app.peripherals.create',
+            'icon'        => 'fa fa-solid fa-plus mr-2',
+            //'label'       => 4,
+            'label_color' => 'success',
+            'can'         => 'app.peripherals.create'
+        ],
         ['header' => 'GESTIÓN DE USUARIOS', 'can' => 'app.users.index'],
         [
             'text'        => 'Usuarios',

@@ -113,6 +113,11 @@ class RoleSeeder extends Seeder
         ])->syncRoles([$roleAdmin, $roleTeacher]);
 
         Permission::create([
+            'name' => 'app.peripherals.show',
+            'description' => 'Ver detalle de periféricos'
+        ])->syncRoles([$roleAdmin, $roleTeacher]);
+
+        Permission::create([
             'name' => 'app.peripherals.create',
             'description' => 'Crear periféricos'
         ])->syncRoles([$roleAdmin]);
