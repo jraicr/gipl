@@ -18,9 +18,12 @@
 
     <div class="card">
         <div class="card-header">
-            @if (auth()->user()->can('app.peripherals.create') || auth()->user()->hasRole('Admin'))
+
+            @can('app.peripherals.create')
                 <a class="btn btn-primary" href="{{ route('app.peripherals.create') }}">Crear periférico</a>
-            @endif
+            @endcan
+
+
         </div>
         <div class="card-body">
             <table class="table table-striped">
@@ -40,7 +43,7 @@
                             <td>{{ $peripheral->name }} </td>
 
                             {{-- <!-- @if ($incidence->student != null) --}}
-                                {{-- <td>{{ $incidence->student->name }} </td>
+                            {{-- <td>{{ $incidence->student->name }} </td>
                             @else
                                 <td>Sin estudiante asignado</td>
                             @endif --> --}}
@@ -48,16 +51,17 @@
 
                             <td><a class="btn btn-info" href="{{ route('app.peripherals.show', $peripheral) }}">Ver</td>
                             <td>
-                                @if (auth()->user()->can('app.peripherals.edit') || auth()->user()->hasRole('Admin'))
-                                    <a class="btn btn-primary" href="{{ route('app.peripherals.edit', $peripheral) }}">Editar</a>
-                                @endif
+                                @can('app.peripherals.edit')
+                                    <a class="btn btn-primary"
+                                        href="{{ route('app.peripherals.edit', $peripheral) }}">Editar</a>
+                                @endcan
                             </td>
                             <td>
-                                @if (auth()->user()->can('app.peripherals.destroy') || auth()->user()->hasRole('Admin'))
+                                @can('app.peripherals.destroy')
                                     {!! Form::model('peripheral', ['route' => ['app.peripherals.destroy', $peripheral], 'method' => 'DELETE']) !!}
                                     {!! Form::submit('Eliminar', ['class' => 'btn btn-danger remove-peripheral']) !!}
                                     {!! Form::close() !!}
-                                @endif
+                                @endcan
                             </td>
                         </tr>
                     @endforeach
@@ -110,7 +114,7 @@
 
             function showConfirmationModal(e) {
 
-                e.preventDefault();  // Evitamos que el botón de eliminar ejecute el submit.
+                e.preventDefault(); // Evitamos que el botón de eliminar ejecute el submit.
 
                 // Cacheamos el elemento del botón que se ha pulsado originalmente,
                 //  para rescatar la fila de la incidencia en la tabla posteriormente.

@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Venturecraft\Revisionable\Revisionable;
 
-class Computer extends Model
+class Computer extends Revisionable
 {
     use HasFactory;
 
@@ -23,5 +24,10 @@ class Computer extends Model
 
     public function incidences() {
         return $this->hasManyThrough(Incidence::class, Peripheral::class);
+    }
+
+    public function identifiableName()
+    {
+        return $this->num;
     }
 }
