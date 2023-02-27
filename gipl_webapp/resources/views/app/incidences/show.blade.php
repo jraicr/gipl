@@ -72,12 +72,10 @@
                 <h2>Aula {{ $incidence->computer->classroom->num }}</h2>
             @else
                 @if (!$incidence->computer->classroom)
-                    <div class="alert alert-warning alert-dismissible fade show" id="alert" role="alert">
+                    <div class="alert alert-warning fade show" id="alert" role="alert">
                         Esta incidencia pertenece al periferico <strong> {{ $incidence->peripheral->name }} </strong> del
                         ordenador <strong>{{ $incidence->computer->num }}</strong> y no cuenta con un aula
                         asociada</strong>
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
-                                aria-hidden="true">&times;</span></button>
                     </div>
                 @endif
             @endif

@@ -21,9 +21,13 @@
     @endif
 
     @if ($student->computer != null && $student->computer->classroom == null)
-        <div class="alert alert-warning alert-dismissible fade show" id="alert" role="alert">
-            <strong>Advertencia:</strong> Este estudiante está asignado a un ordenador <strong>({{$student->computer->num}})</strong> sin aula asignada
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <div class="alert alert-warning fade show" id="alert" role="alert">
+            @can('app.computers.edit')
+                <strong>Advertencia:</strong> Este estudiante está asignado a un ordenador ({{$student->computer->num}}) sin aula. Por favor, <a class="alert-link" href="{{-- {{ route('app.computers.edit', $student->computer) }} --}}">seleccione un nuevo aula<a/> para este ordenador o asigne un nuevo ordenador a este alumno.
+            @else
+                <strong>Advertencia:</strong> Este estudiante está asignado a un ordenador ({{$student->computer->num}}) sin aula. Contacte con un administrador para que seleccione un nuevo aula para este ordenador o asigne un nuevo ordenador a este alumno.
+            @endcan
+
         </div>
     @endif
 
