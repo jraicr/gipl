@@ -23,19 +23,24 @@ class ComputerRequest extends FormRequest
      */
     public function rules()
     {
-        // $computer = $this->route()->parameter('computer');
+        $computer = $this->route()->parameter('computer');
+        $id = $computer->id;
 
         $rules = [
             'num' => [
                         'required',
                         'unique:App\Models\Computer',
-                        'regex:/^INFORMATICA\-[0-9]{3}$/',
+                        'regex:/^INFORMATICA\-[0-9]{3}$/'
                      ]
         ];
 
-        // if ($computer) {
-        //     $rules['num'] = 'required|unique:App\Models\Computer|regex:/^INFORMATICA\-[0-9]{3}$/'. $computer->id;
-        // }
+         if ($computer) {
+
+            $rules['num'] = ['required',
+                            'regex:/^INFORMATICA\-[0-9]{3}$/',
+                            'unique:computers,num,'. $computer->id
+                            ];
+         }
 
         return $rules;
     }

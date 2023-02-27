@@ -37,8 +37,7 @@
 
             {!! Form::model($computer, ['route' => ['app.computers.update', $computer], 'autocomplete' => 'off', 'method' => 'put']) !!}
 
-                @livewire('app.computers.partials.form', ['student' => $computer, 'classrooms' => $classrooms])
-
+                @livewire('app.computers.partials.form', ['computer' => $computer, 'classrooms' => $classrooms])
         </div>
 
         <div class="card-footer">
