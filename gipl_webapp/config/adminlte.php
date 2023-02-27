@@ -352,6 +352,21 @@ return [
             'label_color' => 'success',
             'can'         => 'app.peripherals.create'
         ],
+        ['header' => 'GESTIÓN DE ORDENADORES', 'can' => 'app.computers.index'],
+        [
+            'text'        => 'Listado de ordenadores',
+            'route'       => 'app.computers.index',
+            'icon'        => 'fa fa-solid fa-desktop mr-2',
+            'label_color' => 'success',
+            'can'         => 'app.computers.index'
+        ],
+        [
+            'text'        => 'Añadir ordenador',
+            'route'       => 'app.computers.create',
+            'icon'        => 'fa fa-solid fa-plus mr-2',
+            'label_color' => 'success',
+            'can'         => 'app.computers.create'
+        ],
         ['header' => 'GESTIÓN DE AULAS', 'can' => 'app.classrooms.index'],
         [
             'text'        => 'Listado de aulas',
