@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ClassroomController;
+use App\Http\Controllers\ComputerController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\IncidenceController;
 use App\Http\Controllers\StudentController;
@@ -37,6 +38,7 @@ Route::resource('incidences', IncidenceController::class)->names('app.incidences
 Route::resource('peripherals', PeripheralController::class)->names('app.peripherals');
 Route::resource('students', StudentController::class)->names('app.students');
 Route::resource('classrooms', ClassroomController::class)->except('show')->names('app.classrooms');
+Route::resource('computers', ComputerController::class)->names('app.computers');
 Route::resource('users', UserController::class)->only(['index', 'edit', 'update'])->names('app.users');
 Route::resource('roles', RoleController::class)->except('show')->names('app.roles');
 
