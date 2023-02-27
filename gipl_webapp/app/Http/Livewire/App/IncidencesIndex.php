@@ -20,7 +20,7 @@ class IncidencesIndex extends Component
 
     public function render()
     {
-        $incidences = Incidence::where('description', 'LIKE', '%' . $this->search . '%')->paginate(20);
+        $incidences = Incidence::where('description', 'LIKE', '%' . $this->search . '%')->latest()->paginate(20);
 
         if ($this->search) {
             // Busqueda de perifericos
