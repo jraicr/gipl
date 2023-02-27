@@ -335,86 +335,46 @@ return [
             'label_color' => 'success',
             'can'         => 'app.incidences.create'
         ],
-        ['header' => 'GESTIÓN DE PERIFÉRICOS', 'can' => 'app.peripherals.index'],
+         ['header' => 'OTROS', 'can' => 'app.peripherals.index'],
          [
-             'text'        => 'Listado de periféricos',
+             'text'        => 'Periféricos',
              'route'       => 'app.peripherals.index',
              'icon'        => 'fa fa-keyboard mr-1',
              //'label'       => 4,
              'label_color' => 'success',
              'can'         => 'app.peripherals.index'
          ],
-         [
-            'text'        => 'Crear periférico',
-            'route'       => 'app.peripherals.create',
-            'icon'        => 'fa fa-solid fa-plus mr-2',
-            //'label'       => 4,
-            'label_color' => 'success',
-            'can'         => 'app.peripherals.create'
-        ],
-        ['header' => 'GESTIÓN DE ORDENADORES', 'can' => 'app.computers.index'],
         [
-            'text'        => 'Listado de ordenadores',
+            'text'        => 'Ordenadores',
             'route'       => 'app.computers.index',
             'icon'        => 'fa fa-solid fa-desktop mr-2',
             'label_color' => 'success',
             'can'         => 'app.computers.index'
         ],
+    
         [
-            'text'        => 'Añadir ordenador',
-            'route'       => 'app.computers.create',
-            'icon'        => 'fa fa-solid fa-plus mr-2',
-            'label_color' => 'success',
-            'can'         => 'app.computers.create'
-        ],
-        ['header' => 'GESTIÓN DE AULAS', 'can' => 'app.classrooms.index'],
-        [
-            'text'        => 'Listado de aulas',
+            'text'        => 'Aulas',
             'route'       => 'app.classrooms.index',
             'icon'        => 'fa fa-solid fa-book mr-2',
             'label_color' => 'success',
             'can'         => 'app.classrooms.index'
         ],
-        [
-            'text'        => 'Añadir aula',
-            'route'       => 'app.classrooms.create',
-            'icon'        => 'fa fa-solid fa-plus mr-2',
-            'label_color' => 'success',
-            'can'         => 'app.classrooms.create'
-        ],
 
-        ['header' => 'GESTIÓN DE GRUPOS ESCOLARES', 'can' => 'app.classrooms.index'],
         [
-            'text'        => 'Listado de grupos escolares',
+            'text'        => 'Grupos Escolares',
             'route'       => 'app.scholar_groups.index',
-            'icon'        => 'fa fa-solid fa-book mr-2',
+            'icon'        => 'fa fa-graduation-cap mr-1',
             'label_color' => 'success',
             'can'         => 'app.scholar_groups.index'
         ],
-        [
-            'text'        => 'Añadir grupo escolar',
-            'route'       => 'app.scholar_groups.create',
-            'icon'        => 'fa fa-solid fa-plus mr-2',
-            'label_color' => 'success',
-            'can'         => 'app.scholar_groups.create'
-        ],
-        ['header' => 'GESTIÓN DE ALUMNOS', 'can' => 'app.students.index'],
          [
-             'text'        => 'Listado de alumnos',
+             'text'        => 'Alumnos',
              'route'       => 'app.students.index',
-             'icon'        => 'fa fa-graduation-cap mr-1',
+             'icon'        => 'fa fa-user-plus mr-1',
              //'label'       => 4,
              'label_color' => 'success',
              'can'         => 'app.students.index'
          ],
-         [
-            'text'        => 'Añadir alumno',
-            'route'       => 'app.students.create',
-            'icon'        => 'fa fa-solid fa-plus mr-2',
-            //'label'       => 4,
-            'label_color' => 'success',
-            'can'         => 'app.students.create'
-        ],
         ['header' => 'GESTIÓN DE USUARIOS', 'can' => 'app.users.index'],
         [
             'text'        => 'Usuarios',

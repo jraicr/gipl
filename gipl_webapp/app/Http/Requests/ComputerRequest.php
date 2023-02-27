@@ -24,7 +24,6 @@ class ComputerRequest extends FormRequest
     public function rules()
     {
         $computer = $this->route()->parameter('computer');
-        $id = $computer->id;
 
         $rules = [
             'num' => [
