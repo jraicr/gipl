@@ -40,6 +40,7 @@ Route::resource('peripherals', PeripheralController::class)->names('app.peripher
 Route::resource('students', StudentController::class)->names('app.students');
 Route::resource('classrooms', ClassroomController::class)->except('show')->names('app.classrooms');
 Route::resource('scholar_groups', ScholarGroupController::class)->names('app.scholar_groups');
+Route::get('edit_scholar_group/{scholar_group}/remove_student/{student})', [StudentController::class, 'removeScholarGroup'])->middleware('can:app.students.edit')->name('app.student_remove_scholar_group.update');
 Route::resource('users', UserController::class)->only(['index', 'edit', 'update'])->names('app.users');
 Route::resource('roles', RoleController::class)->except('show')->names('app.roles');
 

@@ -108,4 +108,10 @@ class StudentController extends Controller
 
         return redirect()->route('app.students.index')->with('info', 'El alumno se eliminó con éxito.');
     }
+
+    public function removeScholarGroup(ScholarGroup $scholar_group, Student $student) {
+        $student->update(['scholar_group_id' => NULL]);
+
+        return redirect()->route('app.scholar_groups.show', $scholar_group)->with('info', 'Estudiante eliminado del grupo con éxito');
+    }
 }
