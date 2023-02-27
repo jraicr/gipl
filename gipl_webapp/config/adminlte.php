@@ -382,6 +382,22 @@ return [
             'label_color' => 'success',
             'can'         => 'app.classrooms.create'
         ],
+
+        ['header' => 'GESTIÓN DE GRUPOS ESCOLARES', 'can' => 'app.classrooms.index'],
+        [
+            'text'        => 'Listado de grupos escolares',
+            'route'       => 'app.scholar_groups.index',
+            'icon'        => 'fa fa-solid fa-book mr-2',
+            'label_color' => 'success',
+            'can'         => 'app.scholar_groups.index'
+        ],
+        [
+            'text'        => 'Añadir grupo escolar',
+            'route'       => 'app.scholar_groups.create',
+            'icon'        => 'fa fa-solid fa-plus mr-2',
+            'label_color' => 'success',
+            'can'         => 'app.scholar_groups.create'
+        ],
         ['header' => 'GESTIÓN DE ALUMNOS', 'can' => 'app.students.index'],
          [
              'text'        => 'Listado de alumnos',
