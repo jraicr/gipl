@@ -14,6 +14,7 @@
                         <tr>
                             <th>ID</th>
                             <th>Nombre</th>
+                            <th>Fecha de creación</th>
                             <th colspan="3"></th>
                         </tr>
                     </thead>
