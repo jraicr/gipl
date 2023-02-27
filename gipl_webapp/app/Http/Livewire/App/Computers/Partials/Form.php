@@ -12,6 +12,7 @@ class Form extends Component
     public $computer;
 
     public $selectedClassroomID;
+    public $selectedComputer;
 
     public function render()
     {
@@ -30,6 +31,7 @@ class Form extends Component
         if (old('classroom_id') || old('num')) {
             $this->selectedClassroomID = old('classroom_id');
             $this->selectedComputer = old('num');
+
         } else if ($this->computer) {
             if ($this->computer->classroom_id != null) {
 
