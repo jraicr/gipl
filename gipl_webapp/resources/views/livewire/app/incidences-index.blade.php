@@ -7,6 +7,7 @@
             @endcan
         </div>
         <div class="card-body">
+            @if ($incidences->count())
             <table class="table table-striped">
                 <thead>
                     <th>ID</th>
@@ -88,6 +89,9 @@
 
                 </tbody>
             </table>
+            @else
+                <strong>No hay registros cuyos campos coincidan con lo que estás buscando.</strong>
+            @endif
         </div>
         <div class="card-footer">
             {{ $incidences->links() }}

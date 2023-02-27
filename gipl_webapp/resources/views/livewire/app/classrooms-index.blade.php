@@ -48,7 +48,7 @@
             </div>
         @else
             <div class="card-body">
-                <strong>No existen usuarios con estos datos</strong>
+                <strong>No existen aulas con ese número</strong>
             </div>
         @endif
 
