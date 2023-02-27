@@ -16,6 +16,7 @@ class Form extends Component
     public $peripheral;
 
     public $selectedClassroomID;
+    public $selectedComputerID;
 
     public function render()
     {

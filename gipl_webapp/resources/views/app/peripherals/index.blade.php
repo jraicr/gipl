@@ -84,7 +84,7 @@
         const listenForRemove = () => {
             let removeButtons;
             let removeConfirmationDialog;
-            let currentIncidenceToRemove;
+            let currentPeripheralToRemove;
 
             let contentContainer;
 
@@ -97,7 +97,7 @@
             }
 
             function cacheElements() {
-                removeButtons = document.querySelectorAll('.remove-incidence');
+                removeButtons = document.querySelectorAll('.remove-peripheral');
                 contentContainer = document.querySelector(".container-fluid");
             }
 
@@ -118,9 +118,9 @@
 
                 // Cacheamos el elemento del botón que se ha pulsado originalmente,
                 //  para rescatar la fila de la incidencia en la tabla posteriormente.
-                currentIncidenceToRemove = e.target;
+                currentPeripheralToRemove = e.target;
 
-                removeConfirmationDialog = createDialog('¿Desea borrar esta incidencia?', contentContainer);
+                removeConfirmationDialog = createDialog('¿Desea borrar este periférico?', contentContainer);
                 removeConfirmationDialog.showModal();
             }
 
@@ -128,15 +128,15 @@
             function handlerUserInput(e, returnValue) {
                 if (returnValue == 'remove') {
                     console.log(e.target);
-                    currentIncidenceToRemove.form.submit();
-                    currentIncidenceToRemove.parentNode.parentNode.parentNode.style.backgroundColor = "#ff7b7b";
+                    currentPeripheralToRemove.form.submit();
+                    currentPeripheralToRemove.parentNode.parentNode.parentNode.style.backgroundColor = "#ff7b7b";
 
                 } else {
-                    currentIncidenceToRemove.parentNode.parentNode.parentNode.style.backgroundColor = null;
+                    currentPeripheralToRemove.parentNode.parentNode.parentNode.style.backgroundColor = null;
                 }
 
-                currentIncidenceToRemove.parentNode.parentNode.parentNode.style.transition = "all 300ms linear";
-                currentIncidenceToRemove = undefined;
+                currentPeripheralToRemove.parentNode.parentNode.parentNode.style.transition = "all 300ms linear";
+                currentPeripheralToRemove = undefined;
             }
 
             // Crea un modal con el elemento html Dialog.
