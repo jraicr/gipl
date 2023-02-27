@@ -10,6 +10,8 @@ class Computer extends Revisionable
 {
     use HasFactory;
 
+    protected $fillable = ['num', 'classroom_id'];
+
     public function students() {
         return $this->hasMany(Student::class);
     }
