@@ -39,7 +39,7 @@
                                 <td>Sin estudiante asignado</td>
                             @endif
 
-                            @if ($incidence->user != null)
+                            @if (isset($incidence->user))
                                 <td>{{ $incidence->user->name }} </td>
                             @else
                                 <td>Sin profesor asignado</td>
@@ -88,7 +88,9 @@
 
                 </tbody>
             </table>
-            {{ $incidences->links('pagination::bootstrap-5') }}
+        </div>
+        <div class="card-footer">
+            {{ $incidences->links() }}
         </div>
     </div>
 </div>
