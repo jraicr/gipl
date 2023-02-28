@@ -63,22 +63,31 @@
             <h4 class="bg-primary p-2">Listado de estudiantes</h4>
 
             <ul class="list-group mb-4">
-                @foreach ($scholarGroup->students->toQuery()->orderBy('group_num')->get() as $student)
-                    <li class="list-group-item justify-content-between align-items-center">
+                @if ($scholarGroup->students->Count())
+                    @foreach ($scholarGroup->students->toQuery()->orderBy('group_num')->get() as $student)
+                        <li class="list-group-item justify-content-between align-items-center">
 
-                        <strong>#{{ $student->group_num }}</strong> {{ $student->name }} {{ $student->surname }}
+                            <strong>#{{ $student->group_num }}</strong> {{ $student->name }} {{ $student->surname }}
 
-                        @can('app.students.edit')
-                        <a href="{{ route('app.student_remove_scholar_group.update', ['scholar_group' => $scholarGroup, 'student' => $student]) }}"
-                            class="btn btn-sm btn-danger float-right">Eliminar del grupo</a>
-                        @endcan
+                            @can('app.students.edit')
+                                <a href="{{ route('app.student_remove_scholar_group.update', ['scholar_group' => $scholarGroup, 'student' => $student]) }}"
+                                class="btn btn-sm btn-danger float-right">Eliminar del grupo</a>
+                            @endcan
 
-                        @can('app.students.show')
-                            <a href="{{ route('app.students.show', $student) }}"
+                            @can('app.students.show')
+                                <a href="{{ route('app.students.show', $student) }}"
                                 class="btn btn-sm btn-secondary float-right mr-3">Ver alumno</a>
-                        @endcan
+                            @endcan
+                        </li>
+                    @endforeach
+
+                    @else
+                    <li class="list-group-item justify-content-between align-items-center">
+                        <strong>Este grupo no cuenta con estudiantes</strong>
                     </li>
-                @endforeach
+
+                @endif
+
             </ul>
         </div>
 
