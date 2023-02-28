@@ -8,7 +8,7 @@
         </div>
         <div class="card-body">
             @if ($incidences->count())
-            <table class="table table-striped">
+            <table class="table table-striped table-responsive">
                 <thead>
                     <th>ID</th>
                     <th>Aula</th>
